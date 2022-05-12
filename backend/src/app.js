@@ -97,6 +97,58 @@ app.post("/api/users", (req, res) => {
       else res.status(500).send("Error saving the user");
     });
 });
+
+app.put("/api/users/:id", (req, res) => {
+  const { familyname, email, ageGroup, city, ecologicalLevel } = req.body;
+  const userId = req.params.id;
+  const db = connection.promise();
+  let existingUser = null;
+  db.query("SELECT * FROM users WHERE id = ?", [userId]).then(([results]) => {
+    existingUser = results[0];
+    if (!existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
+    existingUser = Joi.object({
+      email: Joi.string().email().max(255),
+      familyname: Joi.string().max(255),
+      ageGroup: Joi.string().max(255),
+      city: Joi.string().max(255),
+      ecologicalLevel: Joi.string().max(255),
+      avatarUrl: Joi.string().max(255),
+    }).validate(
+      { familyname, email, ageGroup, city, ecologicalLevel },
+      { abortEarly: false }
+    ).error;
+    if (existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
+    return db
+      .query("UPDATE users SET ? WHERE id = ?", [req.body, userId])
+      .then(() => {
+        res.status(200).json({ ...existingUser, ...req.body });
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err === "USER_NOT_FOUND")
+          res.status(404).send(`User with id ${userId} not found.`);
+        else res.status(500).send("Error updating a user");
+      });
+  });
+});
+
+app.delete("/api/users/:id", (req, res) => {
+  connection.query(
+    "DELETE FROM users WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting an user");
+      }
+      if (result.affectedRows) {
+        res.status(200).send("🎉 User deleted!");
+      } else {
+        res.status(404).send("User not found.");
+      }
+    }
+  );
+});
+
 // Routes for activities
 app.get("/api/activities", (req, res) => {
   connection.query("SELECT * FROM activities", (err, result) => {
@@ -112,7 +164,7 @@ app.get("/api/activities", (req, res) => {
 app.get("/api/activities/:id", (req, res) => {
   const activityId = req.params.id;
   connection.query(
-    "SELECT * FROM users WHERE id = ?",
+    "SELECT * FROM activities WHERE id = ?",
     [activityId],
     (err, results) => {
       if (err) {
@@ -126,7 +178,7 @@ app.get("/api/activities/:id", (req, res) => {
   );
 });
 
-app.post("/api/users", (req, res) => {
+app.post("/api/activities", (req, res) => {
   const {
     name,
     duration,
@@ -134,50 +186,139 @@ app.post("/api/users", (req, res) => {
     ageGroup,
     ecologicalLevel,
     description,
+    requirements,
     pictureActivity,
   } = req.body;
 
   const db = connection.promise();
-  let validationErrors = null;
-  db.query("SELECT * FROM users WHERE email = ?", [email])
-    .then(([result]) => {
-      if (result[0]) return Promise.reject(new Error("DUPLICATE_EMAIL"));
-      validationErrors = Joi.object({
-        email: Joi.string().email().max(255).required(),
-        familyname: Joi.string().max(255).required(),
-        ageGroup: Joi.string().max(255).required(),
-        city: Joi.string().max(255).required(),
-        ecologicalLevel: Joi.string().max(255).required(),
-        avatarUrl: Joi.string().max(255),
-      }).validate(
-        { familyname, email, ageGroup, city, ecologicalLevel },
-        { abortEarly: false }
-      ).error;
-      if (validationErrors) return Promise.reject(new Error("INVALID_DATA"));
-      return db.query(
-        "INSERT INTO users (familyname, email, ageGroup, city, ecologicalLevel, avatarUrl) VALUES (?, ?, ?, ?, ?,?)",
-        [familyname, email, ageGroup, city, ecologicalLevel, userAvatar]
-      );
-    })
+  const validationErrors = Joi.object({
+    name: Joi.string().max(255).required(),
+    duration: Joi.string().max(255).required(),
+    category: Joi.string().max(255).required(),
+    ageGroup: Joi.string().max(255).required(),
+    ecologicalLevel: Joi.string().max(255).required(),
+    description: Joi.string().max(5000).required(),
+    requirements: Joi.string().max(5000),
+    pictureActivity: Joi.string().max(5000),
+  }).validate(
+    {
+      name,
+      duration,
+      category,
+      ageGroup,
+      ecologicalLevel,
+      description,
+      requirements,
+      pictureActivity,
+    },
+    { abortEarly: false }
+  ).error;
+  if (validationErrors) return res.status(422).json({ validationErrors });
+  return db
+    .query(
+      "INSERT INTO activities (name, duration, category, ageGroup, ecologicalLevel, description, requirements, pictureActivity) VALUES (?, ?, ?, ?, ?,?,?,?)",
+      [
+        name,
+        duration,
+        category,
+        ageGroup,
+        ecologicalLevel,
+        description,
+        requirements,
+        pictureActivity,
+      ]
+    )
     .then(([{ insertId }]) => {
       res.status(201).json({
         id: insertId,
-        familyname,
-        email,
+        name,
+        duration,
+        category,
         ageGroup,
-        city,
         ecologicalLevel,
-        avatarUrl: userAvatar,
+        description,
+        requirements,
+        pictureActivity,
       });
     })
-    .catch((err) => {
-      console.error(err);
-      if (err === "DUPLICATE_EMAIL")
-        res.status(409).json({ message: "This email is already used" });
-      else if (err === "INVALID_DATA")
-        res.status(422).json({ validationErrors });
-      else res.status(500).send("Error saving the user");
+    .catch(() => {
+      res.status(500).send("Error saving the user");
     });
+});
+
+app.put("/api/activities/:id", (req, res) => {
+  const {
+    name,
+    duration,
+    category,
+    ageGroup,
+    ecologicalLevel,
+    description,
+    requirements,
+    pictureActivity,
+  } = req.body;
+  const activityId = req.params.id;
+  const db = connection.promise();
+  let existingActivity = null;
+  db.query("SELECT * FROM activities WHERE id = ?", [activityId]).then(
+    ([results]) => {
+      existingActivity = results[0];
+      if (!existingActivity)
+        return Promise.reject(new Error("ACTIVITY_NOT_FOUND"));
+      existingActivity = Joi.object({
+        name: Joi.string().max(255),
+        duration: Joi.string().max(255),
+        category: Joi.string().max(255),
+        ageGroup: Joi.string().max(255),
+        ecologicalLevel: Joi.string().max(255),
+        description: Joi.string().max(5000),
+        requirements: Joi.string().max(5000),
+        pictureActivity: Joi.string().max(5000),
+      }).validate(
+        {
+          name,
+          duration,
+          category,
+          ageGroup,
+          ecologicalLevel,
+          description,
+          requirements,
+          pictureActivity,
+        },
+        { abortEarly: false }
+      ).error;
+      if (existingActivity)
+        return Promise.reject(new Error("RECORD_NOT_FOUND"));
+      return db
+        .query("UPDATE activities SET ? WHERE id = ?", [req.body, activityId])
+        .then(() => {
+          res.status(200).json({ ...existingActivity, ...req.body });
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err === "RECORD_NOT_FOUND")
+            res.status(404).send(`Activity with id ${activityId} not found.`);
+          else res.status(500).send("Error updating activities");
+        });
+    }
+  );
+});
+
+app.delete("/api/activities/:id", (req, res) => {
+  connection.query(
+    "DELETE FROM activities WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting an activity");
+      }
+      if (result.affectedRows) {
+        res.status(200).send("🎉 Activity deleted!");
+      } else {
+        res.status(404).send("Activity not found.");
+      }
+    }
+  );
 });
 
 // Routes for events
@@ -219,54 +360,142 @@ app.post("/api/events", (req, res) => {
     ageGroup,
     ecologicalLevel,
     description,
-    requirements,
     pictureActivity,
   } = req.body;
-//   const userAvatar = `https://avatars.dicebear.com/api/avataaars/:${email}.svg`;
 
   const db = connection.promise();
-  let validationErrors = null;
-  db.query("SELECT * FROM events WHERE name = ?", [name])
-    .then(([result]) => {
-      if (result[0]) return Promise.reject(new Error("DUPLICATE_EMAIL"));
-      validationErrors = Joi.object({
-        email: Joi.string().email().max(255).required(),
-        familyname: Joi.string().max(255).required(),
-        ageGroup: Joi.string().max(255).required(),
-        city: Joi.string().max(255).required(),
-        ecologicalLevel: Joi.string().max(255).required(),
-        avatarUrl: Joi.string().max(255),
-      }).validate(
-        { familyname, email, ageGroup, city, ecologicalLevel },
-        { abortEarly: false }
-      ).error;
-      if (validationErrors) return Promise.reject(new Error("INVALID_DATA"));
-      return db.query(
-        "INSERT INTO users (familyname, email, ageGroup, city, ecologicalLevel, avatarUrl) VALUES (?, ?, ?, ?, ?,?)",
-        [familyname, email, ageGroup, city, ecologicalLevel, userAvatar]
-      );
-    })
+  const validationErrors = Joi.object({
+    name: Joi.string().max(255).required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required(),
+    category: Joi.string().max(255).required(),
+    eventLocation: Joi.string().max(255).required(),
+    ageGroup: Joi.string().max(255).required(),
+    ecologicalLevel: Joi.string().max(255).required(),
+    description: Joi.string().max(255).required(),
+    pictureActivity: Joi.string().max(255),
+  }).validate(
+    {
+      name,
+      startDate,
+      endDate,
+      category,
+      eventLocation,
+      ageGroup,
+      ecologicalLevel,
+      description,
+      pictureActivity,
+    },
+    { abortEarly: false }
+  ).error;
+  if (validationErrors) return res.status(422).json({ validationErrors });
+  return db
+    .query(
+      "INSERT INTO events (name, startDate, endDate, category, eventLocation, ageGroup, ecologicalLevel, description, pictureActivity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [
+        name,
+        startDate,
+        endDate,
+        category,
+        eventLocation,
+        ageGroup,
+        ecologicalLevel,
+        description,
+        pictureActivity,
+      ]
+    )
     .then(([{ insertId }]) => {
       res.status(201).json({
         id: insertId,
-        familyname,
-        email,
+        name,
+        startDate,
+        endDate,
+        category,
+        eventLocation,
         ageGroup,
-        city,
         ecologicalLevel,
-        avatarUrl: userAvatar,
+        description,
+        pictureActivity,
       });
     })
-    .catch((err) => {
-      console.error(err);
-      if (err === "DUPLICATE_EMAIL")
-        res.status(409).json({ message: "This email is already used" });
-      else if (err === "INVALID_DATA")
-        res.status(422).json({ validationErrors });
-      else res.status(500).send("Error saving the user");
+    .catch(() => {
+      res.status(500).send("Error saving the event");
     });
 });
 
+app.put("/api/events/:id", (req, res) => {
+  const {
+    name,
+    startDate,
+    endDate,
+    category,
+    eventLocation,
+    ageGroup,
+    ecologicalLevel,
+    description,
+    pictureActivity,
+  } = req.body;
+  const eventId = req.params.id;
+  const db = connection.promise();
+  let existingEvent = null;
+  db.query("SELECT * FROM events WHERE id = ?", [eventId]).then(([results]) => {
+    existingEvent = results[0];
+    if (!existingEvent) return Promise.reject(new Error("EVENT_NOT_FOUND"));
+    existingEvent = Joi.object({
+      name: Joi.string().max(255),
+      startDate: Joi.date(),
+      endDate: Joi.date(),
+      category: Joi.string().max(255),
+      eventLocation: Joi.string().max(255),
+      ageGroup: Joi.string().max(255),
+      ecologicalLevel: Joi.string().max(255),
+      description: Joi.string().max(255),
+      pictureActivity: Joi.string().max(255),
+    }).validate(
+      {
+        name,
+        startDate,
+        endDate,
+        category,
+        eventLocation,
+        ageGroup,
+        ecologicalLevel,
+        description,
+        pictureActivity,
+      },
+      { abortEarly: false }
+    ).error;
+    if (existingEvent) return Promise.reject(new Error("EVENT_NOT_FOUND"));
+    return db
+      .query("UPDATE events SET ? WHERE id = ?", [req.body, eventId])
+      .then(() => {
+        res.status(200).json({ ...existingEvent, ...req.body });
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err === "EVENT_NOT_FOUND")
+          res.status(404).send(`User with id ${eventId} not found.`);
+        else res.status(500).send("Error updating a event");
+      });
+  });
+});
+
+app.delete("/api/events/:id", (req, res) => {
+  connection.query(
+    "DELETE FROM events WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting an event");
+      }
+      if (result.affectedRows) {
+        res.status(200).send("🎉 Event deleted!");
+      } else {
+        res.status(404).send("Event not found.");
+      }
+    }
+  );
+});
 // Routes for challenges
 app.get("/api/challenges", (req, res) => {
   connection.query("SELECT * FROM challenges", (err, result) => {
@@ -296,4 +525,94 @@ app.get("/api/challenges/:id", (req, res) => {
   );
 });
 
+app.post("/api/challenges", (req, res) => {
+  const { name, description, pointsScored } = req.body;
+
+  const db = connection.promise();
+  const validationErrors = Joi.object({
+    name: Joi.string().max(255).required(),
+    description: Joi.string().max(5000).required(),
+    pointsScored: Joi.number().min(0),
+  }).validate(
+    {
+      name,
+      description,
+      pointsScored,
+    },
+    { abortEarly: false }
+  ).error;
+  if (validationErrors) return res.status(422).json({ validationErrors });
+  return db
+    .query(
+      "INSERT INTO challenges (name, description, pointsScored) VALUES (?, ?, ?)",
+      [name, description, pointsScored]
+    )
+    .then(([{ insertId }]) => {
+      res.status(201).json({
+        id: insertId,
+        name,
+        description,
+        pointsScored,
+      });
+    })
+    .catch(() => {
+      res.status(500).send("Error saving the event");
+    });
+});
+
+app.put("/api/challenges/:id", (req, res) => {
+  const { name, description, pointsScored } = req.body;
+  const challengeId = req.params.id;
+  const db = connection.promise();
+  let existingChallenge = null;
+  db.query("SELECT * FROM challenges WHERE id = ?", [challengeId]).then(
+    ([results]) => {
+      existingChallenge = results[0];
+      if (!existingChallenge)
+        return Promise.reject(new Error("CHALLENGE_NOT_FOUND"));
+      existingChallenge = Joi.object({
+        name: Joi.string().max(255),
+        description: Joi.string().max(5000),
+        pointsScored: Joi.number().min(0),
+      }).validate(
+        {
+          name,
+          description,
+          pointsScored,
+        },
+        { abortEarly: false }
+      ).error;
+      if (existingChallenge)
+        return Promise.reject(new Error("CHALLENGE_NOT_FOUND"));
+      return db
+        .query("UPDATE challenges SET ? WHERE id = ?", [req.body, challengeId])
+        .then(() => {
+          res.status(200).json({ ...existingChallenge, ...req.body });
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err === "CHALLENGE_NOT_FOUND")
+            res.status(404).send(`Challenge with id ${challengeId} not found.`);
+          else res.status(500).send("Error updating a challenge");
+        });
+    }
+  );
+});
+
+app.delete("/api/challenges/:id", (req, res) => {
+  connection.query(
+    "DELETE FROM challenges WHERE id = ?",
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting this challenge");
+      }
+      if (result.affectedRows) {
+        res.status(200).send("🎉 Challenge deleted!");
+      } else {
+        res.status(404).send("Challenge not found.");
+      }
+    }
+  );
+});
 module.exports = app;
