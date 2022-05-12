@@ -18,7 +18,7 @@ import {
   CheckboxGroup,
 } from "@chakra-ui/react";
 
-import activityPatisserie from "../assets/activityPatisserie";
+import dailyChallenge from "../assets/dailychallenge.png";
 
 function CardActivite() {
   const initRef = useRef();
@@ -49,7 +49,7 @@ function CardActivite() {
                 justifyContent="space-between"
               >
                 <Image
-                  src={activityPatisserie}
+                  src={dailyChallenge}
                   alt=""
                   borderTopRadius="28px"
                   minW="100%"
@@ -106,7 +106,7 @@ function CardActivite() {
                     <Flex flexDirection="column" align="center">
                       <Flex>
                         <Image
-                          src={activityPatisserie}
+                          src={dailyChallenge}
                           alt=""
                           borderTopRadius="28px"
                           minW="50%"
