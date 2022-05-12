@@ -38,7 +38,7 @@ export default function WelcomeCard({ users }) {
               px={3}
             >
               Hello la tribu
-              {/* {challenges.name} */} !
+              {/* {users.familyname} */} !
             </Heading>
 
             <Text
