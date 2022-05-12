@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import {
   Popover,
+  Avatar,
   Heading,
   Flex,
   Button,
@@ -11,21 +12,24 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   Container,
+  Stack,
+  Checkbox,
+  CheckboxGroup,
 } from "@chakra-ui/react";
 
-import emptyImage from "../assets/emptyImage.svg";
+import activityPatisserie from "../assets/activityPatisserie";
 
 function CardActivite() {
   const initRef = useRef();
   return (
-    <Container w="400px" mt="15rem">
+    <Container w="600px" mt="15rem">
       <Flex
         flexDirection="column"
         m="1rem"
         minH="500px"
-        justifyContent="space-between"
+        w="450px"
+        justifyContent="space-around"
       >
         <Popover
           Popover
@@ -33,27 +37,53 @@ function CardActivite() {
           placement="top"
           initialFocusRef={initRef}
         >
-          {({ isOpen, onClose }) => (
+          {({ isOpen }) => (
             <>
               <Flex
                 flexDirection="column"
                 align="center"
                 minH="400px"
+                w="450px"
                 border="1px"
                 borderRadius="30px"
+                justifyContent="space-between"
               >
                 <Image
-                  src={emptyImage}
+                  src={activityPatisserie}
                   alt=""
                   borderTopRadius="28px"
                   minW="100%"
-                  h="18em"
+                  h="15em"
                 />
-                <Heading>NOM ACTIVITE</Heading>
                 <Flex justifyContent="space-around" w="100%">
-                  <Text>Catégorie</Text>
-                  <Text>Durée</Text>
-                  <Text>Tranche d'âge</Text>
+                  <Avatar alignSelf="flex-end">BLa</Avatar>
+                  <Heading fontStyle="bold">NOM ACTIVITE</Heading>
+                </Flex>
+                <Flex justifyContent="space-around" w="100%" m="auto">
+                  <Text
+                    alignSelf="center"
+                    align="center"
+                    fontSize="2xl"
+                    color="#6E41E2"
+                  >
+                    Catégorie
+                  </Text>
+                  <Text
+                    alignSelf="center"
+                    align="center"
+                    fontSize="2xl"
+                    color="#6E41E2"
+                  >
+                    Durée
+                  </Text>
+                  <Text
+                    alignSelf="center"
+                    align="center"
+                    fontSize="2xl"
+                    color="#6E41E2"
+                  >
+                    Tranche d'âge
+                  </Text>
                 </Flex>
               </Flex>
               <PopoverTrigger>
@@ -67,59 +97,93 @@ function CardActivite() {
                   h="600px"
                   w="600px"
                   mb="0.5rem"
-                  border="1px"
+                  border="2px"
                   borderColor="black"
                   borderRadius="30px"
                   m="1rem"
                 >
                   <PopoverHeader>
                     <Flex flexDirection="column" align="center">
-                      <Image
-                        src={emptyImage}
-                        alt=""
-                        borderTopRadius="28px"
-                        minW="100%"
-                        h="18em"
-                      />
-                      <Heading>NOM ACTIVITE</Heading>
-                      <Flex
-                        justifyContent="space-around"
-                        flexWrap="wrap"
-                        w="100%"
-                        h="100px"
-                      >
+                      <Flex>
+                        <Image
+                          src={activityPatisserie}
+                          alt=""
+                          borderTopRadius="28px"
+                          minW="50%"
+                          h="15em"
+                        />
+                        <Heading alignSelf="center" align="center">
+                          NOM ACTIVITE
+                        </Heading>
+                      </Flex>
+                      <Flex justifyContent="space-around" w="100%" h="40px">
                         <Text
-                          w="33%"
                           alignSelf="center"
                           align="center"
-                          fontSize="xl"
+                          fontSize="2xl"
+                          color="#6E41E2"
                         >
                           Catégorie
                         </Text>
-                        <Text w="33%" alignSelf="center" align="center">
+                        <Text
+                          alignSelf="center"
+                          align="center"
+                          fontSize="2xl"
+                          color="#6E41E2"
+                        >
                           Durée
                         </Text>
-                        <Text w="33%" alignSelf="center" align="center">
+                        <Text
+                          alignSelf="center"
+                          align="center"
+                          fontSize="2xl"
+                          color="#6E41E2"
+                        >
                           Tranche d'âge
                         </Text>
-                        <Text w="33%" alignSelf="center" align="center">
+                      </Flex>
+                      <Flex justifyContent="space-around" w="100%" h="40px">
+                        <Text
+                          alignSelf="center"
+                          align="center"
+                          fontSize="2xl"
+                          color="#6E41E2"
+                        >
                           Créateur
                         </Text>
-                        <Text w="33%" alignSelf="center" align="center">
+                        <Text
+                          alignSelf="center"
+                          align="center"
+                          fontSize="2xl"
+                          color="#6E41E2"
+                        >
                           Niveau
                         </Text>
                       </Flex>
                     </Flex>
                   </PopoverHeader>
-                  <PopoverBody>
-                    <Flex justifyContent="space-around">
-                      <Text>
-                        DETAILS : Lorem, ipsum dolor sit amet consectetur
-                        adipisicing elit. Dolores quod facilis molestias impedit
-                        voluptate iure neque fugiat similique ipsum magnam ab
-                        odio quis delectus rerum, magni nulla ipsam dolore. Nam!
-                      </Text>
-                    </Flex>
+                  <PopoverBody
+                    w="99%"
+                    h="40%"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="space-around"
+                    alignItems="center"
+                  >
+                    <CheckboxGroup>
+                      Matériels nécessaires :
+                      <Stack spacing="1" direction="column">
+                        <Checkbox colorScheme="purple">Matériel 1</Checkbox>
+                        <Checkbox colorScheme="purple">Matériel 2</Checkbox>
+                        <Checkbox colorScheme="purple">Matériel 3</Checkbox>
+                      </Stack>
+                    </CheckboxGroup>
+                    <Text>
+                      DETAILS : Lorem, ipsum dolor sit amet consectetur
+                      adipisicing elit. Dolores quod facilis molestias impedit
+                      voluptate iure neque fugiat similique ipsum magnam ab odio
+                      quis delectus rerum, magni nulla ipsam dolore. Nam!
+                    </Text>
                   </PopoverBody>
                 </PopoverContent>
               </Portal>
