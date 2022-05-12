@@ -1,10 +1,12 @@
 import React from "react";
-import DailyChallenge from "../components/DailyChallenge";
+// import DailyChallenge from "../components/DailyChallenge";
+import BasicUsage from "../components/CardActivite";
 
 export default function Home() {
   return (
     <div>
-      <DailyChallenge />
+      {/* <DailyChallenge /> */}
+      <BasicUsage />
     </div>
   );
 }

@@ -1,198 +1,141 @@
-import { useRef } from "react";
 import {
-  Popover,
+  Button,
+  Box,
   Avatar,
   Heading,
   Flex,
-  Button,
   Text,
-  PopoverTrigger,
-  Image,
-  Portal,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  Container,
-  Stack,
-  Checkbox,
-  CheckboxGroup,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 
-import dailyChallenge from "../assets/dailychallenge.png";
+import activityCookies from "../assets/activityCookies.png";
 
-function CardActivite() {
-  const initRef = useRef();
+function BasicUsage() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Container w="600px" mt="15rem">
+    <Flex flexDirection="column" h="500px">
       <Flex
         flexDirection="column"
-        m="1rem"
-        minH="500px"
+        align="center"
+        h="400px"
         w="450px"
-        justifyContent="space-around"
+        border="1px"
+        borderRadius="30px"
+        boxShadow={"2xl"}
       >
-        <Popover
-          Popover
-          closeOnBlur={false}
-          placement="top"
-          initialFocusRef={initRef}
+        <Box
+          h="40%"
+          w="100%"
+          borderTopRadius="30px"
+          bgImage={activityCookies}
+          bgRepeat="no-repeat"
+          bgSize="cover"
+          bgPos="center"
         >
-          {({ isOpen }) => (
-            <>
-              <Flex
-                flexDirection="column"
+          <Flex
+            h="280px"
+            mt="7em"
+            gap="2"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <Avatar alignSelf="flex-start" size="lg" />
+            <Heading fontStyle="italic" alignSelf="center">
+              NOM ACTIVITE
+            </Heading>
+            <Flex justifyContent="space-around" w="100%" alignSelf="flex-end">
+              <Text
+                alignSelf="center"
                 align="center"
-                minH="400px"
-                w="450px"
-                border="1px"
-                borderRadius="30px"
-                justifyContent="space-between"
+                fontSize="2xl"
+                color="#6E41E2"
               >
-                <Image
-                  src={dailyChallenge}
-                  alt=""
-                  borderTopRadius="28px"
-                  minW="100%"
-                  h="15em"
-                />
-                <Flex justifyContent="space-around" w="100%">
-                  <Avatar alignSelf="flex-end">BLa</Avatar>
-                  <Heading fontStyle="bold">NOM ACTIVITE</Heading>
-                </Flex>
-                <Flex justifyContent="space-around" w="100%" m="auto">
-                  <Text
-                    alignSelf="center"
-                    align="center"
-                    fontSize="2xl"
-                    color="#6E41E2"
-                  >
-                    Catégorie
-                  </Text>
-                  <Text
-                    alignSelf="center"
-                    align="center"
-                    fontSize="2xl"
-                    color="#6E41E2"
-                  >
-                    Durée
-                  </Text>
-                  <Text
-                    alignSelf="center"
-                    align="center"
-                    fontSize="2xl"
-                    color="#6E41E2"
-                  >
-                    Tranche d'âge
-                  </Text>
-                </Flex>
-              </Flex>
-              <PopoverTrigger>
-                <Button w="50%" alignSelf="center">
-                  Voir {isOpen ? "moins" : "plus"} de détails
-                </Button>
-              </PopoverTrigger>
-              <Portal>
-                <PopoverContent
-                  justifyContent="space-around"
-                  h="600px"
-                  w="600px"
-                  mb="0.5rem"
-                  border="2px"
-                  borderColor="black"
-                  borderRadius="30px"
-                  m="1rem"
-                >
-                  <PopoverHeader>
-                    <Flex flexDirection="column" align="center">
-                      <Flex>
-                        <Image
-                          src={dailyChallenge}
-                          alt=""
-                          borderTopRadius="28px"
-                          minW="50%"
-                          h="15em"
-                        />
-                        <Heading alignSelf="center" align="center">
-                          NOM ACTIVITE
-                        </Heading>
-                      </Flex>
-                      <Flex justifyContent="space-around" w="100%" h="40px">
-                        <Text
-                          alignSelf="center"
-                          align="center"
-                          fontSize="2xl"
-                          color="#6E41E2"
-                        >
-                          Catégorie
-                        </Text>
-                        <Text
-                          alignSelf="center"
-                          align="center"
-                          fontSize="2xl"
-                          color="#6E41E2"
-                        >
-                          Durée
-                        </Text>
-                        <Text
-                          alignSelf="center"
-                          align="center"
-                          fontSize="2xl"
-                          color="#6E41E2"
-                        >
-                          Tranche d'âge
-                        </Text>
-                      </Flex>
-                      <Flex justifyContent="space-around" w="100%" h="40px">
-                        <Text
-                          alignSelf="center"
-                          align="center"
-                          fontSize="2xl"
-                          color="#6E41E2"
-                        >
-                          Créateur
-                        </Text>
-                        <Text
-                          alignSelf="center"
-                          align="center"
-                          fontSize="2xl"
-                          color="#6E41E2"
-                        >
-                          Niveau
-                        </Text>
-                      </Flex>
-                    </Flex>
-                  </PopoverHeader>
-                  <PopoverBody
-                    w="99%"
-                    h="40%"
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="space-around"
-                    alignItems="center"
-                  >
-                    <CheckboxGroup>
-                      Matériels nécessaires :
-                      <Stack spacing="1" direction="column">
-                        <Checkbox colorScheme="purple">Matériel 1</Checkbox>
-                        <Checkbox colorScheme="purple">Matériel 2</Checkbox>
-                        <Checkbox colorScheme="purple">Matériel 3</Checkbox>
-                      </Stack>
-                    </CheckboxGroup>
-                    <Text>
-                      DETAILS : Lorem, ipsum dolor sit amet consectetur
-                      adipisicing elit. Dolores quod facilis molestias impedit
-                      voluptate iure neque fugiat similique ipsum magnam ab odio
-                      quis delectus rerum, magni nulla ipsam dolore. Nam!
-                    </Text>
-                  </PopoverBody>
-                </PopoverContent>
-              </Portal>
-            </>
-          )}
-        </Popover>
+                Catégorie
+              </Text>
+              <Text
+                alignSelf="center"
+                align="center"
+                fontSize="2xl"
+                color="#6E41E2"
+              >
+                Durée
+              </Text>
+              <Text
+                alignSelf="center"
+                align="center"
+                fontSize="2xl"
+                color="#6E41E2"
+              >
+                Tranche d'âge
+              </Text>
+            </Flex>
+            <Button
+              onClick={onOpen}
+              colorScheme="purple"
+              w="40%"
+              alignSelf="center"
+            >
+              Voir plus de détails
+            </Button>
+          </Flex>
+        </Box>
       </Flex>
-    </Container>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="full">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader p="0">
+            <Box
+              bgImage={activityCookies}
+              bgRepeat="no-repeat"
+              bgSize="cover"
+              bgPos="center"
+            >
+              <Flex h="40vh" gap="2" flexDirection="column">
+                <Flex mt="18vh" w="50%" gap="10">
+                  <Avatar alignSelf="flex-start" size="2xl" />
+                  <Text alignSelf="center" fontSize="6xl" color="purple">
+                    NOM FAMILLE
+                  </Text>
+                </Flex>
+                <Heading fontStyle="italic" alignSelf="center" size="4xl">
+                  NOM ACTIVITE
+                </Heading>
+              </Flex>
+            </Box>
+          </ModalHeader>
+          <ModalCloseButton color="white" size="lg" />
+          <ModalBody mt="18vh">
+            <Text>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+              at pariatur sed autem tempora similique quas molestias eos
+              deserunt, ut veritatis nihil in rem mollitia aliquid itaque
+              quisquam praesentium veniam!
+            </Text>
+          </ModalBody>
+
+          <ModalFooter alignSelf="center">
+            <Button
+              color="#6E41E2"
+              onClick={onClose}
+              fontSize="6xl"
+              h="100px"
+              w="500px"
+            >
+              Fermer
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Flex>
   );
 }
 
-export default CardActivite;
+export default BasicUsage;
