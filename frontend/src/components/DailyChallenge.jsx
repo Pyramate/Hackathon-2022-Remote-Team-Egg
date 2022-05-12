@@ -80,12 +80,11 @@ export default function DailyChallenge({ challenges }) {
 
             <Stack
               width={"100%"}
-              mt={"2rem"}
               direction={"row"}
-              padding={2}
-              justifyContent={"center"}
+              px={3}
               alignItems={"center"}
             >
+              <Text>Challenge accompli ?</Text>
               <Switch
                 onChange={handleClick}
                 colorScheme="purple"
