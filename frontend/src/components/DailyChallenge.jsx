@@ -12,10 +12,10 @@ import {
 } from "@chakra-ui/react";
 import dailyChallenge from "../assets/dailychallenge.png";
 
-export default function DailyChallenge({challenges}) {
-const [isCliked, setIsClicked] = useState(false)
+export default function DailyChallenge({ challenges }) {
+  const [isCliked, setIsClicked] = useState(false);
 
-function handleClick() {
+  function handleClick() {
     setIsClicked(!isCliked);
   }
 
@@ -38,10 +38,16 @@ function handleClick() {
             justifyContent="space-around"
             pt={2}
           >
-              {isCliked ? 
-            <Button pointerEvents="none" fontSize={"xl"} colorScheme="teal" variant="outline">
-              Challenge accompli!
-            </Button> : null }
+            {isCliked ? (
+              <Button
+                pointerEvents="none"
+                fontSize={"xl"}
+                colorScheme="teal"
+                variant="outline"
+              >
+                Félicitations, challenge accompli!
+              </Button>
+            ) : null}
 
             <Heading
               fontSize={"3xl"}
@@ -49,17 +55,29 @@ function handleClick() {
               color={"purple.700"}
               pl={2}
             >
+              {/* {challenges.name} */}
               Challenge du jour :
             </Heading>
-            {/* {challenges.name} */}
+
             <Text
               fontSize={"xl"}
               color={useColorModeValue("gray.700", "gray.400")}
               px={3}
-            > Le challenge here!
-             {/* {challenges.description} */}
+            >
+              {" "}
+              Le challenge here!
+              {/* {challenges.description} */}
             </Text>
-            {/* {challenges.pointsScored} */}
+            <Text
+              fontSize={"l"}
+              color={useColorModeValue("gray.700", "gray.400")}
+              px={3}
+            >
+              {" "}
+              Ce challenge pourrait te rapporter :
+              {/* {challenges.pointsScored} */}
+            </Text>
+
             <Stack
               width={"100%"}
               mt={"2rem"}
@@ -68,7 +86,11 @@ function handleClick() {
               justifyContent={"center"}
               alignItems={"center"}
             >
-              <Switch onChange={handleClick} colorScheme="purple" size="lg"></Switch>
+              <Switch
+                onChange={handleClick}
+                colorScheme="purple"
+                size="lg"
+              ></Switch>
             </Stack>
           </Stack>
           <Flex flex={1}>
