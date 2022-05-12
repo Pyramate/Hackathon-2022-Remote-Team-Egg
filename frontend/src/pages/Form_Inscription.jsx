@@ -1,46 +1,33 @@
 import {
-  FormControl,
-  FormLabel,
   Input,
   Stack,
   Button,
   Flex,
-  Spacer,
-  Center,
   Container,
   SimpleGrid,
   Text,
   Box,
   Heading,
-  useBreakpointValue,
-  VStack,
-  Textarea,
-  InputGroup,
-  InputLeftElement,
-  Image,
 } from "@chakra-ui/react";
 import Home from "./Home.jsx";
 import fond from "../assets/fondinscription.png";
-import { useState } from "react";
 
 export default function Inscription() {
-  const [input, setInput] = useState("");
-
-  const handleInputChange = (e) => setInput(e.target.value);
-
-  const handleClick = (e) => (
+  function input() {
     <Input
-      placeholder="name@email.com"
+      placeholder="nom de l'enfant"
       bg={"gray.100"}
       border={0}
       color={"gray.500"}
       _placeholder={{
         color: "gray.500",
       }}
-    />
-  );
+    />;
+  }
 
-  const isError = input === "";
+  function handleClick(e) {
+    input(e.target.value);
+  }
 
   return (
     <>
@@ -52,6 +39,7 @@ export default function Inscription() {
           spacing={{ base: 10, lg: 5 }}
           py={{ base: 10, sm: 20, lg: 32 }}
           z-index="10"
+          h="100vh"
         >
           <Stack spacing={{ base: 10, md: 20 }}></Stack>
           <Stack
@@ -129,7 +117,7 @@ export default function Inscription() {
                   />{" "}
                   <Button
                     bgGradient="linear(to-r, purple.400,purple.200)"
-                    onClick={handleClick}
+                    onClick={() => handleClick}
                   >
                     +
                   </Button>
