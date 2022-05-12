@@ -1,12 +1,15 @@
 const express = require("express");
 const path = require("path");
 const Joi = require("joi");
+const cors = require("cors");
 const connection = require("../db_config");
 
 // let's create express app
 // const globalConnection = require("../migrate");
 
 const app = express();
+
+app.use(cors());
 
 // use some application-level middlewares
 
