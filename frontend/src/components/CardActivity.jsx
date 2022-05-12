@@ -16,6 +16,10 @@ import {
   Image,
 } from "@chakra-ui/react";
 
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+
 import activityCookies from "../assets/activityCookies.png";
 import createurDeContenu from "../assets/createur-de-contenu.png";
 import enfants from "../assets/enfants.png";
@@ -23,7 +27,18 @@ import histoire from "../assets/histoire.png";
 import liste from "../assets/liste.png";
 import niveau from "../assets/niveau-superieur.png";
 
-function CardActivity({ activity, user }) {
+function CardActivity({ activity }) {
+  const [users, setUsers] = useState([]);
+
+  const getActivity = () => {
+    axios
+      .get("https://localhost4000/api/users")
+      .then((res) => setUsers(users(res.activity)));
+  };
+  useEffect(() => {
+    getActivity();
+  }, []);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex flexDirection="column" h="500px">
@@ -33,7 +48,7 @@ function CardActivity({ activity, user }) {
         h="450px"
         w="450px"
         border="1px"
-        borderRadius="30px"
+        borderRadius="32px"
         boxShadow={"2xl"}
       >
         <Box
