@@ -633,33 +633,58 @@ app.post("/api/users/:userId/activities/:activityId", (req, res) => {
   const db = connection.promise();
   let existingUser = null;
   let existingActivity = null;
-  db.query("SELECT * FROM users WHERE id = ?", [userId]).then(([results]) => {
-    existingUser = results[0];
-
-    if (!existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
-    return db
-      .query("SELECT * FROM activities WHERE id = ?", [activityId])
-      .then(([result]) => {
-        existingActivity = result[0];
-        if (!existingActivity)
-          return Promise.reject(new Error("ACTIVITY_NOT_FOUND"));
-        return db
-          .query(
-            "INSERT INTO reservation_activities (userId, activityId) VALUES (?, ?)",
-            [userId, activityId]
-          )
-          .then(([{ insertId }]) => {
-            res.status(201).json({
-              id: insertId,
-              userId,
-              activityId,
+  db.query(
+    "SELECT * FROM reservation_activities WHERE userId = ? AND activityId = ?",
+    [userId, activityId]
+  )
+    .then(([result]) => {
+      if (result.length > 0)
+        return Promise.reject(new Error("DUPLICATE_ENTRY"));
+      return db
+        .query("SELECT * FROM users WHERE id = ?", [userId])
+        .then(([results]) => {
+          existingUser = results[0];
+          if (!existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
+          return db
+            .query("SELECT * FROM activities WHERE id = ?", [activityId])
+            .then(([newresult]) => {
+              existingActivity = newresult[0];
+              if (!existingActivity)
+                return Promise.reject(new Error("ACTIVITY_NOT_FOUND"));
+              return db
+                .query(
+                  "INSERT INTO reservation_activities (userId, activityId) VALUES (?, ?)",
+                  [userId, activityId]
+                )
+                .then(([{ insertId }]) => {
+                  res.status(201).json({
+                    id: insertId,
+                    userId,
+                    activityId,
+                  });
+                })
+                .catch(() => {
+                  res.status(500).send("Error saving the reservation");
+                });
+            })
+            .catch((err) => {
+              console.error(err);
+              res
+                .status(404)
+                .json({ message: `Activity with id ${activityId} not found.` });
             });
-          })
-          .catch(() => {
-            res.status(500).send("Error saving the reservation");
-          });
-      });
-  });
+        })
+        .catch((err) => {
+          console.error(err);
+          res
+            .status(404)
+            .json({ message: `User with id ${userId} not found.` });
+        });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(409).json({ message: "This entry is already used" });
+    });
 });
 
 app.get("/api/participationevents", (req, res) => {
@@ -755,4 +780,5 @@ app.post("/api/users/:userId/challenges/:challengeId", (req, res) => {
     );
   });
 });
+
 module.exports = app;
