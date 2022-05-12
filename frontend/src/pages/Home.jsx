@@ -4,7 +4,6 @@ import DailyChallenge from "../components/DailyChallenge";
 export default function Home() {
   return (
     <div>
-        <p>hello</p>
       <DailyChallenge />
     </div>
   );

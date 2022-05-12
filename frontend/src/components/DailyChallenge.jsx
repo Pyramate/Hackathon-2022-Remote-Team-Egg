@@ -21,7 +21,7 @@ export default function DailyChallenge() {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: "100%", md: "540px" }}
+          w={{ sm: "100%", md: "800px" }}
           height={{ sm: "476px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
           bg={useColorModeValue("white", "gray.900")}
@@ -31,15 +31,14 @@ export default function DailyChallenge() {
           <Stack
             flex={1}
             flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            p={1}
-            pt={2}
+            justifyContent="space-around"
+            pt={4}
           >
-            <Heading fontSize={"2xl"} fontFamily={"body"} color={"purple.700"}>
+            <Heading fontSize={"3xl"} fontFamily={"body"} color={"purple.700"} pl={2}>
               Challenge du jour
             </Heading>
             <Text
+            fontSize={"l"}
               color={useColorModeValue("gray.700", "gray.400")}
               px={3}
             >
