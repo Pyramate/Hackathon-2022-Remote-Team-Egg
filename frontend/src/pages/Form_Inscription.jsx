@@ -53,7 +53,7 @@ export default function FormInscription() {
 
   return (
     <>
-      <FormControl isRequired onSubmit={postUser && <Home />}>
+      <FormControl isRequired onSubmit={postUser}>
         <Box bgImage={fond} bgRepeat="no-repeat" bgSize="cover">
           <Container
             as={SimpleGrid}
