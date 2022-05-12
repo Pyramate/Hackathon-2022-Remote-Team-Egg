@@ -81,7 +81,11 @@ export default function FormInscription() {
                   Il n’est jamais trop tôt pour faire de grandes choses{" "}
                 </Heading>
                 <Text color={"gray.500"} fontSize={{ base: "sm", sm: "xl" }}>
-                  On a qu'une planète, soit gentil avec elle !
+                  Découvre et partage les initiatives écologiques de ta ville.{" "}
+                </Text>
+                <Text color={"gray.500"} fontSize={{ base: "sm", sm: "xl" }}>
+                  Fais grimper la conscience de ta famille en participant à un
+                  maximum d'événements!{" "}
                 </Text>
               </Stack>
               <Box as={"form"} mt={10}>
@@ -99,7 +103,7 @@ export default function FormInscription() {
                       onChange={handleName}
                     />
                     <Input
-                      placeholder="name@email.com"
+                      placeholder="mail@email.com"
                       bg={"gray.100"}
                       border={0}
                       color={"gray.500"}
