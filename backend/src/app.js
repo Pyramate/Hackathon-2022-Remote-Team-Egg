@@ -615,4 +615,144 @@ app.delete("/api/challenges/:id", (req, res) => {
     }
   );
 });
+
+app.get("/api/reservationactivities", (req, res) => {
+  connection.query("SELECT * FROM reservation_activities", (err, results) => {
+    if (err) {
+      res.status(500).send("Error retrieving reservation from database");
+    } else if (results.length) {
+      res.json(results);
+    } else {
+      res.status(404).send(`Reservation activity does not exist`);
+    }
+  });
+});
+
+app.post("/api/users/:userId/activities/:activityId", (req, res) => {
+  const { userId, activityId } = req.params;
+  const db = connection.promise();
+  let existingUser = null;
+  let existingActivity = null;
+  db.query("SELECT * FROM users WHERE id = ?", [userId]).then(([results]) => {
+    existingUser = results[0];
+
+    if (!existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
+    return db
+      .query("SELECT * FROM activities WHERE id = ?", [activityId])
+      .then(([result]) => {
+        existingActivity = result[0];
+        if (!existingActivity)
+          return Promise.reject(new Error("ACTIVITY_NOT_FOUND"));
+        return db
+          .query(
+            "INSERT INTO reservation_activities (userId, activityId) VALUES (?, ?)",
+            [userId, activityId]
+          )
+          .then(([{ insertId }]) => {
+            res.status(201).json({
+              id: insertId,
+              userId,
+              activityId,
+            });
+          })
+          .catch(() => {
+            res.status(500).send("Error saving the reservation");
+          });
+      });
+  });
+});
+
+app.get("/api/participationevents", (req, res) => {
+  connection.query("SELECT * FROM participation_events", (err, result) => {
+    if (err) {
+      console.error(err);
+      res
+        .status(500)
+        .send("Error retrieving participation events from database");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.post("/api/users/:userId/events/:eventId", (req, res) => {
+  const { userId, eventId } = req.params;
+  const db = connection.promise();
+  let existingEvents = null;
+  let existingUser = null;
+  db.query("SELECT * FROM users WHERE id = ?", [userId]).then(([results]) => {
+    existingUser = results[0];
+    if (!existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
+    db.query("SELECT * FROM events WHERE id = ?", [eventId]).then(
+      ([result]) => {
+        existingEvents = result[0];
+        if (!existingEvents)
+          return Promise.reject(new Error("EVENT_NOT_FOUND"));
+        return db
+          .query(
+            "INSERT INTO participation_events (userId, eventId) VALUES (?, ?)",
+            [userId, eventId]
+          )
+          .then(([{ insertId }]) => {
+            res.status(201).json({
+              id: insertId,
+              userId,
+              eventId,
+            });
+          })
+          .catch(() => {
+            res.status(500).send("Error saving the participation to the event");
+          });
+      }
+    );
+  });
+});
+
+app.get("/api/participationchallenges", (req, res) => {
+  connection.query("SELECT * FROM participation_challenges", (err, result) => {
+    if (err) {
+      console.error(err);
+      res
+        .status(500)
+        .send("Error retrieving participation challenges from database");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.post("/api/users/:userId/challenges/:challengeId", (req, res) => {
+  const { userId, challengeId } = req.params;
+  const db = connection.promise();
+  let existingChallenges = null;
+  let existingUser = null;
+  db.query("SELECT * FROM users WHERE id = ?", [userId]).then(([results]) => {
+    existingUser = results[0];
+    if (!existingUser) return Promise.reject(new Error("USER_NOT_FOUND"));
+    db.query("SELECT * FROM challenges WHERE id = ?", [challengeId]).then(
+      ([result]) => {
+        existingChallenges = result[0];
+        if (!existingChallenges)
+          return Promise.reject(new Error("CHALLENGE_NOT_FOUND"));
+        return db
+          .query(
+            "INSERT INTO participation_challenges (userId, challengeId) VALUES (?, ?)",
+            [userId, challengeId]
+          )
+          .then(([{ insertId }]) => {
+            res.status(201).json({
+              id: insertId,
+              userId,
+              challengeId,
+            });
+          })
+          .catch(() => {
+            res
+              .status(500)
+              .send("Error saving the participation to the challenge");
+          });
+      }
+    );
+  });
+});
 module.exports = app;
