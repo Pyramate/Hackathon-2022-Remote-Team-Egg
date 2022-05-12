@@ -11,8 +11,30 @@ import {
 } from "@chakra-ui/react";
 import Home from "./Home.jsx";
 import fond from "../assets/fondinscription.png";
+import { useState } from "react";
 
 export default function Inscription() {
+  const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [city, setCity] = useState("");
+  const [ecolevel, setEcololevel] = useState("");
+  const [age, setAge] = useState("");
+
+  function handleName(e) {
+    setName(e.target.value);
+  }
+  function handleMail(e) {
+    setMail(e.target.value);
+  }
+  function handleCity(e) {
+    setCity(e.target.value);
+  }
+  function handleLevel(e) {
+    setEcololevel(e.target.value);
+  }
+  function handleAge(e) {
+    setAge(e.target.value);
+  }
   function input() {
     <Input
       placeholder="nom de l'enfant"
@@ -65,7 +87,7 @@ export default function Inscription() {
               <Stack spacing={4}>
                 <Flex direction="row" justify="20px">
                   <Input
-                    placeholder="Nom de ta Famille"
+                    placeholder="Nom de ta Tribu"
                     bg={"gray.100"}
                     border={0}
                     color={"gray.500"}
@@ -73,6 +95,7 @@ export default function Inscription() {
                       color: "gray.500",
                     }}
                     mr="1rem"
+                    onChange={handleName}
                   />
                   <Input
                     placeholder="name@email.com"
@@ -82,6 +105,7 @@ export default function Inscription() {
                     _placeholder={{
                       color: "gray.500",
                     }}
+                    onChange={handleMail}
                   />
                 </Flex>
                 <Flex>
@@ -93,34 +117,30 @@ export default function Inscription() {
                     _placeholder={{
                       color: "gray.500",
                     }}
+                    onChange={handleCity}
                     mr="1rem"
                   />{" "}
                   <Input
-                    placeholder="Nom de l'enfant ?"
+                    placeholder="Niveau écolo"
                     bg={"gray.100"}
                     border={0}
                     color={"gray.500"}
                     _placeholder={{
                       color: "gray.500",
                     }}
+                    onChange={handleLevel}
                     mr="1rem"
                   />{" "}
                   <Input
-                    placeholder="Age de l'enfant ?"
+                    placeholder="Age de tes enfants ?"
                     bg={"gray.100"}
                     border={0}
                     color={"gray.500"}
                     _placeholder={{
                       color: "gray.500",
                     }}
-                    mr="1rem"
+                    onChange={handleAge}
                   />{" "}
-                  <Button
-                    bgGradient="linear(to-r, purple.400,purple.200)"
-                    onClick={() => handleClick}
-                  >
-                    +
-                  </Button>
                 </Flex>
               </Stack>
 
