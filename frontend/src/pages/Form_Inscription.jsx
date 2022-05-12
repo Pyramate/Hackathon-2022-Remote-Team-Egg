@@ -14,9 +14,10 @@ import {
 import Home from "./Home.jsx";
 import fond from "../assets/fondinscription.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Inscription() {
+export default function FormInscription() {
   const [familyname, setFamilyname] = useState("");
   const [email, setEmail] = useState("");
   const [ageGroup, setAgeGroup] = useState("");
@@ -158,21 +159,22 @@ export default function Inscription() {
                     </Select>
                   </Flex>
                 </Stack>
-
-                <Button
-                  fontFamily={"heading"}
-                  mt={8}
-                  type="submit"
-                  w={"full"}
-                  bgGradient="linear(to-r, purple.400,purple.200)"
-                  color={"white"}
-                  _hover={{
-                    bgGradient: "linear(to-r, purple.200,purple.400)",
-                    boxShadow: "xl",
-                  }}
-                >
-                  Enregistrer
-                </Button>
+                <Link to="/accueil" element={<Home />}>
+                  <Button
+                    fontFamily={"heading"}
+                    mt={8}
+                    type="submit"
+                    w={"full"}
+                    bgGradient="linear(to-r, purple.400,purple.200)"
+                    color={"white"}
+                    _hover={{
+                      bgGradient: "linear(to-r, purple.200,purple.400)",
+                      boxShadow: "xl",
+                    }}
+                  >
+                    Enregistrer
+                  </Button>
+                </Link>
               </Box>
             </Stack>
           </Container>
