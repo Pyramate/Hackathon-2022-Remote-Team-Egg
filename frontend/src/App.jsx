@@ -1,8 +1,11 @@
-import '../src/styles/App.css';
+import "../src/styles/App.css";
+import CardActivite from "./components/CardActivite";
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <CardActivite />
+    </div>
   );
 }
 
