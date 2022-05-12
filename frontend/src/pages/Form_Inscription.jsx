@@ -16,6 +16,7 @@ import fond from "../assets/fondinscription.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate} from "react-router";
 
 export default function FormInscription() {
   const [familyname, setFamilyname] = useState("");
@@ -23,6 +24,7 @@ export default function FormInscription() {
   const [ageGroup, setAgeGroup] = useState("");
   const [ecologicalLevel, setEcologicalLevel] = useState("");
   const [city, setCity] = useState("");
+  const navigate = useNavigate();
 
   function handleName(e) {
     setFamilyname(e.target.value);
@@ -49,6 +51,7 @@ export default function FormInscription() {
       city: city,
       ecologicalLevel: ecologicalLevel,
     });
+    navigate("/accueil")
   };
 
   return (
@@ -156,14 +159,13 @@ export default function FormInscription() {
                       <option value="" disabled selected>
                         Age
                       </option>{" "}
-                      <option value="option1">0-3</option>
-                      <option value="option2">4-7</option>
-                      <option value="option3">8-11</option>
-                      <option value="option4">12 et +</option>
+                      <option value="0-3">0-3</option>
+                      <option value="4-7">4-7</option>
+                      <option value="8-11">8-11</option>
+                      <option value="12 et +">12 et +</option>
                     </Select>
                   </Flex>
                 </Stack>
-                <Link to="/accueil" element={<Home />}>
                   <Button
                     fontFamily={"heading"}
                     mt={8}
@@ -178,7 +180,6 @@ export default function FormInscription() {
                   >
                     Enregistrer
                   </Button>
-                </Link>
               </Box>
             </Stack>
           </Container>
