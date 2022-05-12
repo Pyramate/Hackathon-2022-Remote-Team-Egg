@@ -1,8 +1,12 @@
-import '../src/styles/App.css';
+import "../src/styles/App.css";
+
+import Inscription from "./pages/Form_Inscription.jsx";
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <Inscription />
+    </div>
   );
 }
 
