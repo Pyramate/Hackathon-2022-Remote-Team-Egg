@@ -23,7 +23,7 @@ import histoire from "../assets/histoire.png";
 import liste from "../assets/liste.png";
 import niveau from "../assets/niveau-superieur.png";
 
-function CardActivity() {
+function CardActivity({ activity, user }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex flexDirection="column" h="500px">
@@ -41,6 +41,7 @@ function CardActivity() {
           w="100%"
           borderTopRadius="30px"
           bgImage={activityCookies}
+          // bgImage={activity.pictureActivity}
           bgRepeat="no-repeat"
           bgSize="cover"
           bgPos="center"
@@ -53,12 +54,18 @@ function CardActivity() {
             justifyContent="space-between"
           >
             <Flex gap="6" ml="1rem">
-              <Avatar alignSelf="flex-start" size="lg" />
+              <Avatar
+                alignSelf="flex-start"
+                size="lg"
+                // src={user.avatarUrl}
+              />
               <Text alignSelf="end" fontSize="3xl" color="#6E41E2" mt="1.8rem">
+                {/* {user.familyname} */}
                 NOM FAMILLE
               </Text>
             </Flex>
             <Heading fontStyle="italic" alignSelf="center">
+              {/* {activity.name} */}
               NOM ACTIVITE
             </Heading>
             <Flex
@@ -71,18 +78,21 @@ function CardActivity() {
               <Flex gap="2">
                 <Image src={liste} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
+                  {/* {activity.category} */}
                   Catégorie
                 </Text>
               </Flex>
               <Flex gap="2">
                 <Image src={histoire} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
+                  {/* {activity.duration} */}
                   Durée
                 </Text>
               </Flex>
               <Flex gap="2">
                 <Image src={enfants} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
+                  {/* {activity.ageGroup} */}
                   Tranche d'âge
                 </Text>
               </Flex>
@@ -105,14 +115,20 @@ function CardActivity() {
           <ModalHeader p="0">
             <Box
               bgImage={activityCookies}
+              // bgImage={activity.pictureActivity}
               bgRepeat="no-repeat"
               bgSize="cover"
               bgPos="center"
             >
               <Flex h="30vh" gap="5" flexDirection="column">
                 <Flex mt="25vh" w="100%" gap="10" ml="1rem">
-                  <Avatar alignSelf="flex-start" size="2xl" />
+                  <Avatar
+                    alignSelf="flex-start"
+                    size="2xl"
+                    // src={user.avatarUrl}
+                  />
                   <Text alignSelf="end" fontSize="6xl" color="#6E41E2">
+                    {/* {user.familyname} */}
                     NOM FAMILLE
                   </Text>
                 </Flex>
@@ -122,6 +138,7 @@ function CardActivity() {
                   fontSize="7xl"
                   textShadow="2px 2px grey"
                 >
+                  {/* {activity.name} */}
                   NOM ACTIVITE
                 </Text>
               </Flex>
@@ -137,23 +154,38 @@ function CardActivity() {
             <Flex justifyContent="space-around" w="100%" flexWrap="wrap">
               <Flex gap="5">
                 <Image src={liste} w="50px" />
-                <Text fontSize="3xl">Catégorie</Text>
+                <Text fontSize="3xl">
+                  {/* {activity.category} */}
+                  Catégorie
+                </Text>
               </Flex>
               <Flex gap="5">
                 <Image src={enfants} w="50px" />
-                <Text fontSize="3xl">Tranche d'âge</Text>
+                <Text fontSize="3xl">
+                  {/* {activity.ageGroup} */}
+                  Tranche d'âge
+                </Text>
               </Flex>
               <Flex gap="5">
                 <Image src={histoire} w="50px" />
-                <Text fontSize="3xl">Durée</Text>
+                <Text fontSize="3xl">
+                  {/* {activity.duration} */}
+                  Durée
+                </Text>
               </Flex>
               <Flex gap="5">
                 <Image src={niveau} w="50px" />
-                <Text fontSize="3xl">Niveau</Text>
+                <Text fontSize="3xl">
+                  {/* {activity.ecologicalLevel} */}
+                  Niveau
+                </Text>
               </Flex>
               <Flex gap="5">
                 <Image src={createurDeContenu} w="50px" />
-                <Text fontSize="3xl">Créateur</Text>
+                <Text fontSize="3xl">
+                  {/* {user.familyname} */}
+                  Créateur
+                </Text>
               </Flex>
             </Flex>
 
@@ -171,6 +203,7 @@ function CardActivity() {
               >
                 <Heading>Matériels : </Heading>
                 <Text alignSelf="center" fontSize="2xl">
+                  {/* {activity.requirements} */}
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aliquid voluptatum quidem rem fugiat nostrum vitae accusamus
                   delectus in? Doloremque corporis nostrum odio at autem eos
@@ -190,6 +223,7 @@ function CardActivity() {
               >
                 <Heading>Détails : </Heading>
                 <Text alignSelf="center" fontSize="2xl">
+                  {/* {activity.description} */}
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aliquid voluptatum quidem rem fugiat nostrum vitae accusamus
                   delectus in? Doloremque corporis nostrum odio at autem eos
