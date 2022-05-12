@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<FormInscription />} />
-        <Route path="/accueil" element={<Home />} />
+        <Route path="/accueil/:id" element={<Home />} />
         <Route path="/activites" element={<ActivitesGlobales />} />
         {/*<Route path="/evenements" element={<Evenements_Globales />} />
         <Route path="/dashboard" element={<Dashboard />} /> */}

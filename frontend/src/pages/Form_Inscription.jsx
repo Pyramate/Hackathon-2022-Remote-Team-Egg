@@ -14,7 +14,7 @@ import {
 import Home from "./Home.jsx";
 import fond from "../assets/fondinscription.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate} from "react-router";
 
@@ -41,7 +41,8 @@ export default function FormInscription() {
   function handleAge(e) {
     setAgeGroup(e.target.value);
   }
-
+  const { id } = useParams();
+   
   const postUser = (e) => {
     e.preventDefault();
     axios.post("http://localhost:4000/api/users", {
@@ -51,7 +52,7 @@ export default function FormInscription() {
       city: city,
       ecologicalLevel: ecologicalLevel,
     });
-    navigate("/accueil")
+    navigate(`/accueil/${id}`)
   };
 
   return (
