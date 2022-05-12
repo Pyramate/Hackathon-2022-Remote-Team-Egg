@@ -25,7 +25,7 @@ export default function DailyChallenge({ challenges }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: "100%", md: "800px" }}
+          w={{ sm: "100%", md: "50rem" }}
           height={{ sm: "476px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
           bg={useColorModeValue("white", "gray.900")}

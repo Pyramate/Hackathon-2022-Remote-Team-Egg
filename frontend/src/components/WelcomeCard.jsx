@@ -10,6 +10,7 @@ import {
   Flex,
   Image
 } from "@chakra-ui/react";
+
 import dailyChallenge from "../assets/dailychallenge.png";
 
 export default function WelcomeCard({ users }) {
@@ -21,7 +22,7 @@ export default function WelcomeCard({ users }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: "100%", md: "400px" }}
+          w={{ sm: "100%", md: "30rem" }}
           height={{ sm: "476px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
           bg={useColorModeValue("white", "gray.900")}
@@ -42,6 +43,7 @@ export default function WelcomeCard({ users }) {
 
             <Text
               fontSize={"xl"}
+              fontFamily="Heebo"
               color={useColorModeValue("gray.700", "gray.400")}
               px={3}
             >
