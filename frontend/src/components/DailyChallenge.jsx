@@ -1,12 +1,9 @@
 import React from "react";
 import {
-  Badge,
-  Button,
   Center,
   Flex,
   Heading,
   Image,
-  Link,
   Stack,
   Text,
   useColorModeValue,
