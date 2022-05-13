@@ -8,7 +8,7 @@ import {
   FormControl,
   Select,
   Heading,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import fond from "../assets/background.png";
 import { useState } from "react";
@@ -91,23 +91,25 @@ function FormEvents() {
               spacing={{ base: 8 }}
               maxW={{ lg: "2xl" }}
             >
-              <Stack spacing={4}>
+              <Stack spacing={2}>
                 <Heading
+                  alignSelf="center"
+                  w="500px"
                   color={"green.800"}
                   lineHeight={1.1}
                   fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
                 >
                   Partage tes évènements préférés.{" "}
                 </Heading>
-                  <Image
-                    objectFit="cover"
-                    boxSize="100%"
-                    h="300px"
-                    src={activity}
-                  />
+                <Image
+                  objectFit="cover"
+                  boxSize="100%"
+                  h="300px"
+                  src={activity}
+                />
               </Stack>
               <Box as={"form"} mt={10}>
-                <Stack spacing={4}>
+                <Stack spacing={2}>
                   <Flex direction="column" justify="20px">
                     <Stack spacing={4}>
                       <Input
@@ -224,7 +226,7 @@ function FormEvents() {
                           color: "gray.500",
                         }}
                         mr="1rem"
-                        h={200}
+                        h={150}
                         onChange={handleDescription}
                       />
                       <Input
@@ -233,7 +235,7 @@ function FormEvents() {
                         border={0}
                         color={"gray.500"}
                         _placeholder={{
-                          color: "gray.500"
+                          color: "gray.500",
                         }}
                         h={100}
                         onChange={handleRequirement}
@@ -251,20 +253,6 @@ function FormEvents() {
                     </Stack>
                   </Flex>
                 </Stack>
-                <Button
-                  fontFamily={"heading"}
-                  mt={8}
-                  type="submit"
-                  w={"full"}
-                  bgGradient="linear(to-r, purple.400,purple.200)"
-                  color={"white"}
-                  _hover={{
-                    bgGradient: "linear(to-r, purple.200,purple.400)",
-                    boxShadow: "xl",
-                  }}
-                >
-                  Enregistrer
-                </Button>
               </Box>
             </Stack>
           </Container>
