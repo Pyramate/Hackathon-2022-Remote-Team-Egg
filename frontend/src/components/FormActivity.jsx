@@ -4,6 +4,7 @@ import {
   Flex,
   Container,
   Box,
+  Button,
   FormControl,
   Select,
   Heading,
@@ -15,14 +16,14 @@ import axios from 'axios';
 import activity from '../assets/activity.png';
 
 function FormActivity() {
-  const [name, setName] = useState("");
-  const [ageGroup, setAgeGroup] = useState("");
-  const [ecologicalLevel, setEcologicalLevel] = useState("");
-  const [duration, setDuration] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [requirements, setRequirements] = useState("");
-  const [pictureActivity, setPictureActivity] = useState("");
+  const [name, setName] = useState('');
+  const [ageGroup, setAgeGroup] = useState('');
+  const [ecologicalLevel, setEcologicalLevel] = useState('');
+  const [duration, setDuration] = useState('');
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [requirements, setRequirements] = useState('');
+  const [pictureActivity, setPictureActivity] = useState('');
 
   function handleName(e) {
     setName(e.target.value);
@@ -45,7 +46,7 @@ function FormActivity() {
   function handleRequirements(e) {
     setRequirements(e.target.value);
   }
-  
+
   function handlePictureActivity(e) {
     setPictureActivity(e.target.value);
   }
@@ -121,9 +122,9 @@ function FormActivity() {
                   </Flex>
                   <Flex direction="column">
                     <Stack spacing={4}>
-                    <Select
+                      <Select
                         name="Catégorie"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
                         color={'gray.500'}
                         _placeholder={{
@@ -134,12 +135,12 @@ function FormActivity() {
                       >
                         <option value="" disabled selected>
                           Catégorie
-                        </option>{" "}
+                        </option>{' '}
                         <option value="Recette">Recettes</option>
                         <option value="Hygiène">Cosmétiques</option>
                         <option value="Entretien">Produits d'entretien</option>
                         <option value="Jardin">Jardin</option>
-                      </Select>{" "}
+                      </Select>{' '}
                       <Select
                         name="Niveau Ecolo"
                         bg={'gray.100'}
@@ -205,20 +206,19 @@ function FormActivity() {
                       />
                       <Input
                         placeholder="Photo (url)"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500"
+                          color: 'gray.500',
                         }}
                         onChange={handlePictureActivity}
                       />
                     </Stack>
                   </Flex>
                 </Stack>
-                {/* <Button
-                  onClick={onClose}
-                  fontFamily={"heading"}
+                <Button
+                  fontFamily={'heading'}
                   mt={8}
                   type="submit"
                   w={'full'}
@@ -230,7 +230,7 @@ function FormActivity() {
                   }}
                 >
                   Enregistrer
-                </Button> */}
+                </Button>
               </Box>
             </Stack>
           </Container>

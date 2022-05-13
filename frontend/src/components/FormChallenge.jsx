@@ -7,16 +7,17 @@ import {
   FormControl,
   Heading,
   Image,
-} from "@chakra-ui/react";
-import fond from "../assets/background.png";
-import { useState } from "react";
-import axios from "axios";
-import activity from "../assets/activity.png";
+  Button,
+} from '@chakra-ui/react';
+import fond from '../assets/background.png';
+import { useState } from 'react';
+import axios from 'axios';
+import activity from '../assets/activity.png';
 
 function FormChallenge() {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [pointsScored, setPointsScored] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [pointsScored, setPointsScored] = useState('');
 
   function handleName(e) {
     setName(e.target.value);
@@ -30,7 +31,7 @@ function FormChallenge() {
 
   const postEvent = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:4000/api/events", {
+    axios.post('http://localhost:4000/api/events', {
       name: name,
       description: description,
       pointsScored: pointsScored,
@@ -44,19 +45,19 @@ function FormChallenge() {
           <Container py={{ base: 5, sm: 10, lg: 15 }} z-index="10" h="auto">
             <Stack spacing={{ base: 10, md: 20 }}></Stack>
             <Stack
-              bg={"none"}
-              rounded={"xl"}
+              bg={'none'}
+              rounded={'xl'}
               p={{ base: 4, sm: 6, md: 5 }}
               spacing={{ base: 8 }}
-              maxW={{ lg: "2xl" }}
+              maxW={{ lg: '2xl' }}
             >
               <Stack spacing={4}>
                 <Heading
-                  color={"green.800"}
+                  color={'green.800'}
                   lineHeight={1.1}
-                  fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
+                  fontSize={{ base: '2xl', sm: '3xl', md: '5xl' }}
                 >
-                  Défie la communauté à appliquer un petit geste tous les jours.{" "}
+                  Défie la communauté à appliquer un petit geste tous les jours.{' '}
                 </Heading>
                 <Image
                   objectFit="cover"
@@ -65,28 +66,28 @@ function FormChallenge() {
                   src={activity}
                 />
               </Stack>
-              <Box as={"form"} mt={10}>
+              <Box as={'form'} mt={10}>
                 <Stack spacing={4}>
                   <Flex direction="column" justify="20px">
                     <Stack spacing={4}>
                       <Input
                         placeholder="Nom du challenge"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         mr="1rem"
                         onChange={handleName}
                       />
                       <Input
                         placeholder="Description"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         mr="1rem"
                         h={200}
@@ -94,11 +95,11 @@ function FormChallenge() {
                       />
                       <Input
                         placeholder="Points gagnés"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         onChange={handlePointsScored}
                       />
@@ -107,6 +108,20 @@ function FormChallenge() {
                 </Stack>
               </Box>
             </Stack>
+            <Button
+              fontFamily={'heading'}
+              mt={8}
+              type="submit"
+              w={'full'}
+              bgGradient="linear(to-r, purple.400,purple.200)"
+              color={'white'}
+              _hover={{
+                bgGradient: 'linear(to-r, purple.200,purple.400)',
+                boxShadow: 'xl',
+              }}
+            >
+              Enregistrer
+            </Button>
           </Container>
         </Box>
       </FormControl>
