@@ -7,6 +7,7 @@ import FormActivity from "./components/FormActivity";
 import FormEvents from "./components/FormEvents";
 import FormChallenge from "./components/FormChallenge";
 import ActivitesGlobales from "./pages/ActivitesGlobales";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
         <Route path="/form-events" element={<FormEvents />} />
         <Route path="/form-challenge" element={<FormChallenge />} />
         <Route path="/activites" element={<ActivitesGlobales />} />
-        {/* <Route path="/evenements" element={<Evenements_Globales />} />
-        <Route path="/dashboard" element={<Dashboard />} /> */}
+        {/* <Route path="/evenements" element={<Evenements_Globales />} />*/}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
