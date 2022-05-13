@@ -90,6 +90,7 @@ app.post("/api/users", (req, res) => {
         ecologicalLevel,
         avatarUrl: userAvatar,
       });
+      // localStorage.setItem("userId", insertId);
     })
     .catch((err) => {
       console.error(err);

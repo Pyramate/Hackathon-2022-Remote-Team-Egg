@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   CircularProgress,
   CircularProgressLabel,
@@ -8,13 +8,13 @@ import {
   Text,
   useColorModeValue,
   Flex,
-  Image
-} from "@chakra-ui/react";
+  Image,
+} from '@chakra-ui/react';
 
-import dailyChallenge from "../assets/dailychallenge.png";
+import dailyChallenge from '../assets/dailychallenge.png';
 
 export default function WelcomeCard({ users }) {
-  const color = useColorModeValue("green.700");
+  const color = useColorModeValue('green.700');
 
   return (
     <div>
@@ -22,17 +22,17 @@ export default function WelcomeCard({ users }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: "100%", md: "30rem" }}
-          height={{ sm: "476px", md: "20rem" }}
-          direction={{ base: "column", md: "row" }}
-          bg={useColorModeValue("white", "gray.900")}
-          boxShadow={"2xl"}
+          w={{ sm: '100%' }}
+          height={{ sm: '476px', md: '20rem' }}
+          direction={{ base: 'column', md: 'row' }}
+          bg={useColorModeValue('white', 'gray.900')}
+          boxShadow={'2xl'}
           padding={2}
         >
           <Stack flex={1} flexDirection="column" justifyContent="space-around">
             <Heading
-              fontSize={"3xl"}
-              fontFamily={"body"}
+              fontSize={'3xl'}
+              fontFamily={'body'}
               color={color}
               pl={2}
               px={3}
@@ -42,22 +42,22 @@ export default function WelcomeCard({ users }) {
             </Heading>
 
             <Text
-              fontSize={"xl"}
+              fontSize={'xl'}
               fontFamily="Heebo"
-              color={useColorModeValue("gray.700", "gray.400")}
+              color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
               Passez une saine journée.
             </Text>
             <Text
-              fontSize={"l"}
-              color={useColorModeValue("gray.700", "gray.400")}
+              fontSize={'l'}
+              color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
-              {" "}
+              {' '}
               Niveau écolo de la tribu :{/* {users.ecologicalLevel} */}
             </Text>
-            <Flex alignItems={"center"}>
+            <Flex alignItems={'center'}>
               <Text px={3}>Bientôt le prochain niveau! </Text>
               <Flex flexDirection="row">
                 <CircularProgress value={40} color="green.400">
