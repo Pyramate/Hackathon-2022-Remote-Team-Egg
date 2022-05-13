@@ -1,12 +1,10 @@
 import logoactivite from "../assets/image_activites.jpeg";
 import {
   Box,
-  Container,
   Text,
   Flex,
   VStack,
   Stack,
-  Button,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import CarouselGlobalActivitiesPages from "../components/CarouselGlobalActivitiesPages";

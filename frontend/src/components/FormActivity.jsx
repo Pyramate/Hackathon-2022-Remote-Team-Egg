@@ -15,13 +15,14 @@ import axios from 'axios';
 import activity from '../assets/activity.png';
 
 function FormActivity() {
-  const [name, setName] = useState('');
-  const [ageGroup, setAgeGroup] = useState('');
-  const [ecologicalLevel, setEcologicalLevel] = useState('');
-  const [duration, setDuration] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
-  const [requirement, setRequirement] = useState('');
+  const [name, setName] = useState("");
+  const [ageGroup, setAgeGroup] = useState("");
+  const [ecologicalLevel, setEcologicalLevel] = useState("");
+  const [duration, setDuration] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [requirements, setRequirements] = useState("");
+  const [pictureActivity, setPictureActivity] = useState("");
 
   function handleName(e) {
     setName(e.target.value);
@@ -41,8 +42,12 @@ function FormActivity() {
   function handleDescription(e) {
     setDescription(e.target.value);
   }
-  function handleRequirement(e) {
-    setRequirement(e.target.value);
+  function handleRequirements(e) {
+    setRequirements(e.target.value);
+  }
+  
+  function handlePictureActivity(e) {
+    setPictureActivity(e.target.value);
   }
 
   const postActivity = (e) => {
@@ -54,7 +59,8 @@ function FormActivity() {
       ageGroup: ageGroup,
       ecologicalLevel: ecologicalLevel,
       description: description,
-      requirement: requirement,
+      requirements: requirements,
+      pictureActivity: pictureActivity,
     });
   };
 
@@ -115,9 +121,9 @@ function FormActivity() {
                   </Flex>
                   <Flex direction="column">
                     <Stack spacing={4}>
-                      <Input
-                        placeholder="Catégorie"
-                        bg={'gray.100'}
+                    <Select
+                        name="Catégorie"
+                        bg={"gray.100"}
                         border={0}
                         color={'gray.500'}
                         _placeholder={{
@@ -125,7 +131,15 @@ function FormActivity() {
                         }}
                         onChange={handleCategory}
                         mr="1rem"
-                      />{' '}
+                      >
+                        <option value="" disabled selected>
+                          Catégorie
+                        </option>{" "}
+                        <option value="Recette">Recettes</option>
+                        <option value="Hygiène">Cosmétiques</option>
+                        <option value="Entretien">Produits d'entretien</option>
+                        <option value="Jardin">Jardin</option>
+                      </Select>{" "}
                       <Select
                         name="Niveau Ecolo"
                         bg={'gray.100'}
@@ -187,7 +201,17 @@ function FormActivity() {
                           color: 'gray.500',
                         }}
                         h={100}
-                        onChange={handleRequirement}
+                        onChange={handleRequirements}
+                      />
+                      <Input
+                        placeholder="Photo (url)"
+                        bg={"gray.100"}
+                        border={0}
+                        color={"gray.500"}
+                        _placeholder={{
+                          color: "gray.500"
+                        }}
+                        onChange={handlePictureActivity}
                       />
                     </Stack>
                   </Flex>

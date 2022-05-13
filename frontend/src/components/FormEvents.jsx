@@ -25,6 +25,7 @@ function FormEvents() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [eventLocation, setEventLocation] = useState("");
+  const [pictureActivity, setPictureActivity] = useState("");
 
   function handleName(e) {
     setName(e.target.value);
@@ -57,6 +58,10 @@ function FormEvents() {
     setRequirement(e.target.value);
   }
 
+  function handlePicture(e) {
+    setPictureActivity(e.target.value);
+  }
+
   const postEvent = (e) => {
     e.preventDefault();
     axios.post("http://localhost:4000/api/events", {
@@ -69,6 +74,7 @@ function FormEvents() {
       ecologicalLevel: ecologicalLevel,
       description: description,
       requirement: requirement,
+      pictureActivity: pictureActivity
     });
   };
 
@@ -152,8 +158,8 @@ function FormEvents() {
                         onChange={handleEventLocation}
                         mr="1rem"
                       />{" "}
-                      <Input
-                        placeholder="Catégorie"
+                      <Select
+                        name="Catégorie"
                         bg={"gray.100"}
                         border={0}
                         color={"gray.500"}
@@ -162,7 +168,15 @@ function FormEvents() {
                         }}
                         onChange={handleCategory}
                         mr="1rem"
-                      />{" "}
+                      >
+                        <option value="" disabled selected>
+                          Catégorie
+                        </option>{" "}
+                        <option value="Sport">Sport</option>
+                        <option value="Recyclage">Recyclage</option>
+                        <option value="Entretien">Produits d'entretien</option>
+                        <option value="Jardin">Jardin</option>
+                      </Select>{" "}
                       <Select
                         name="Niveau Ecolo"
                         bg={"gray.100"}
@@ -225,6 +239,16 @@ function FormEvents() {
                         }}
                         h={100}
                         onChange={handleRequirement}
+                      />
+                      <Input
+                        placeholder="Photo (url)"
+                        bg={"gray.100"}
+                        border={0}
+                        color={"gray.500"}
+                        _placeholder={{
+                          color: "gray.500"
+                        }}
+                        onChange={handlePicture}
                       />
                     </Stack>
                   </Flex>
