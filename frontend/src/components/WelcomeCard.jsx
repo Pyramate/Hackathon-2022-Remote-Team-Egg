@@ -1,5 +1,4 @@
-import { React, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { React, useEffect } from 'react';
 import axios from 'axios';
 import {
   CircularProgress,
@@ -13,7 +12,6 @@ import {
   Image,
 } from '@chakra-ui/react';
 
-import dailyChallenge from '../assets/dailychallenge.png';
 
 export default function WelcomeCard({ users }) {
   const color = useColorModeValue('green.700');
@@ -60,25 +58,28 @@ export default function WelcomeCard({ users }) {
             >
               Passez une saine journée.
             </Text>
+            <Flex>
             <Text
               fontSize={'l'}
               color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
               {' '}
-              Niveau écolo de la tribu :{users.ecologicalLevel}
+              Niveau écolo de la tribu : 
             </Text>
+            <Text color={color}>{users.ecologicalLevel}</Text>
+            </Flex>
             <Flex alignItems={'center'}>
               <Text px={3}>Bientôt le prochain niveau! </Text>
               <Flex flexDirection="row">
-                <CircularProgress value={40} color="green.400">
-                  <CircularProgressLabel>40%</CircularProgressLabel>
+                <CircularProgress value={0} color="green.400">
+                  <CircularProgressLabel>0%</CircularProgressLabel>
                 </CircularProgress>
               </Flex>
             </Flex>
           </Stack>
           <Flex flex={1}>
-            <Image objectFit="cover" boxSize="100%" src={dailyChallenge} />
+            <Image objectFit="cover" boxSize="100%" src="https://avatars.dicebear.com/api/avataaars/:seed.svg" />
           </Flex>
         </Stack>
       </Center>
