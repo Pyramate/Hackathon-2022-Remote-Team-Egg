@@ -4,8 +4,6 @@ import {
   Button,
   Flex,
   Container,
-  SimpleGrid,
-  Text,
   Box,
   FormControl,
   Select,
@@ -93,7 +91,7 @@ function FormEvents() {
                   lineHeight={1.1}
                   fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
                 >
-                  Partage tes activités préférées.{" "}
+                  Partage tes évènements préférés.{" "}
                 </Heading>
                   <Image
                     objectFit="cover"

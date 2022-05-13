@@ -1,4 +1,6 @@
-import React from "react";
+import { React, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   CircularProgress,
   CircularProgressLabel,
@@ -8,13 +10,23 @@ import {
   Text,
   useColorModeValue,
   Flex,
-  Image
-} from "@chakra-ui/react";
+  Image,
+} from '@chakra-ui/react';
 
-import dailyChallenge from "../assets/dailychallenge.png";
+import dailyChallenge from '../assets/dailychallenge.png';
 
 export default function WelcomeCard({ users }) {
-  const color = useColorModeValue("green.700");
+  const color = useColorModeValue('green.700');
+
+  const getUser = () => {
+    axios
+      .get(`http://localhost:4000/api/users/${users.id}`, {})
+      .then((response) => response.data)
+      .then((data) => console.log(data.familyname));
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div>
@@ -22,42 +34,41 @@ export default function WelcomeCard({ users }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: "100%", md: "30rem" }}
-          height={{ sm: "476px", md: "20rem" }}
-          direction={{ base: "column", md: "row" }}
-          bg={useColorModeValue("white", "gray.900")}
-          boxShadow={"2xl"}
+          w={{ sm: '100%' }}
+          height={{ sm: '476px', md: '20rem' }}
+          direction={{ base: 'column', md: 'row' }}
+          bg={useColorModeValue('white', 'gray.900')}
+          boxShadow={'2xl'}
           padding={2}
         >
           <Stack flex={1} flexDirection="column" justifyContent="space-around">
             <Heading
-              fontSize={"3xl"}
-              fontFamily={"body"}
+              fontSize={'3xl'}
+              fontFamily={'body'}
               color={color}
               pl={2}
               px={3}
             >
-              Hello la tribu
-              {/* {users.familyname} */} !
+              {`Hello la tribu ${users.familyname} !`}
             </Heading>
 
             <Text
-              fontSize={"xl"}
+              fontSize={'xl'}
               fontFamily="Heebo"
-              color={useColorModeValue("gray.700", "gray.400")}
+              color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
               Passez une saine journée.
             </Text>
             <Text
-              fontSize={"l"}
-              color={useColorModeValue("gray.700", "gray.400")}
+              fontSize={'l'}
+              color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
-              {" "}
-              Niveau écolo de la tribu :{/* {users.ecologicalLevel} */}
+              {' '}
+              Niveau écolo de la tribu :{users.ecologicalLevel}
             </Text>
-            <Flex alignItems={"center"}>
+            <Flex alignItems={'center'}>
               <Text px={3}>Bientôt le prochain niveau! </Text>
               <Flex flexDirection="row">
                 <CircularProgress value={40} color="green.400">

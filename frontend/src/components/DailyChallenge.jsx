@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Center,
   Flex,
@@ -9,8 +9,8 @@ import {
   useColorModeValue,
   Switch,
   Button,
-} from "@chakra-ui/react";
-import dailyChallenge from "../assets/dailychallenge.png";
+} from '@chakra-ui/react';
+import dailyChallenge from '../assets/dailychallenge.png';
 
 export default function DailyChallenge({ challenges }) {
   const [isCliked, setIsClicked] = useState(false);
@@ -25,11 +25,11 @@ export default function DailyChallenge({ challenges }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: "100%", md: "50rem" }}
-          height={{ sm: "476px", md: "20rem" }}
-          direction={{ base: "column", md: "row" }}
-          bg={useColorModeValue("white", "gray.900")}
-          boxShadow={"2xl"}
+          w={{ sm: '100%' }}
+          height={{ sm: '476px', md: '20rem' }}
+          direction={{ base: 'column', md: 'row' }}
+          bg={useColorModeValue('white', 'gray.900')}
+          boxShadow={'2xl'}
           padding={2}
         >
           <Stack
@@ -41,7 +41,7 @@ export default function DailyChallenge({ challenges }) {
             {isCliked ? (
               <Button
                 pointerEvents="none"
-                fontSize={"xl"}
+                fontSize={'xl'}
                 colorScheme="teal"
                 variant="outline"
               >
@@ -50,9 +50,9 @@ export default function DailyChallenge({ challenges }) {
             ) : null}
 
             <Heading
-              fontSize={"3xl"}
-              fontFamily={"body"}
-              color={"purple.700"}
+              fontSize={'3xl'}
+              fontFamily={'body'}
+              color={'purple.700'}
               pl={2}
             >
               {/* {challenges.name} */}
@@ -60,29 +60,29 @@ export default function DailyChallenge({ challenges }) {
             </Heading>
 
             <Text
-              fontSize={"xl"}
-              color={useColorModeValue("gray.700", "gray.400")}
+              fontSize={'xl'}
+              color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
-              {" "}
+              {' '}
               Le challenge here!
               {/* {challenges.description} */}
             </Text>
             <Text
-              fontSize={"l"}
-              color={useColorModeValue("gray.700", "gray.400")}
+              fontSize={'l'}
+              color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
             >
-              {" "}
+              {' '}
               Ce challenge pourrait te rapporter :
               {/* {challenges.pointsScored} */}
             </Text>
 
             <Stack
-              width={"100%"}
-              direction={"row"}
+              width={'100%'}
+              direction={'row'}
               px={3}
-              alignItems={"center"}
+              alignItems={'center'}
             >
               <Text>Challenge accompli ?</Text>
               <Switch
