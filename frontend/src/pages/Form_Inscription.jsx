@@ -11,10 +11,10 @@ import {
   Select,
   Heading,
 } from '@chakra-ui/react';
-// import Home from './Home.jsx';
+import Home from './Home.jsx';
 import Background from '../assets/fondinscription.png';
 import { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { setUser } from '../services/userService.js';

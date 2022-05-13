@@ -1,4 +1,6 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   CircularProgress,
   CircularProgressLabel,
@@ -15,6 +17,16 @@ import dailyChallenge from '../assets/dailychallenge.png';
 
 export default function WelcomeCard({ users }) {
   const color = useColorModeValue('green.700');
+
+  const getUser = () => {
+    axios
+      .get(`http://localhost:4000/api/users/${users.id}`, {})
+      .then((response) => response.data)
+      .then((data) => console.log(data.familyname));
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div>
