@@ -16,11 +16,6 @@ import {
   Image,
 } from "@chakra-ui/react";
 
-import axios from "axios";
-
-import { useEffect, useState } from "react";
-
-import activityCookies from "../assets/activityCookies.png";
 import createurDeContenu from "../assets/createur-de-contenu.png";
 import enfants from "../assets/enfants.png";
 import histoire from "../assets/histoire.png";
@@ -28,17 +23,6 @@ import liste from "../assets/liste.png";
 import niveau from "../assets/niveau-superieur.png";
 
 function CardActivity({ activity }) {
-  const [users, setUsers] = useState([]);
-
-  const getUser = () => {
-    axios
-      .get("https://localhost4000/api/users")
-      .then((res) => setUsers(users(res.activity)));
-  };
-  useEffect(() => {
-    getUser();
-  }, []);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex flexDirection="column" h="500px">
@@ -55,8 +39,7 @@ function CardActivity({ activity }) {
           h="40%"
           w="100%"
           borderTopRadius="30px"
-          bgImage={activityCookies}
-          // bgImage={activity.pictureActivity}
+          bgImage={activity.pictureActivity}
           bgRepeat="no-repeat"
           bgSize="cover"
           bgPos="center"
@@ -74,13 +57,9 @@ function CardActivity({ activity }) {
                 size="lg"
                 // src={user.avatarUrl}
               />
-              <Text alignSelf="end" fontSize="3xl" color="#6E41E2" mt="1.8rem">
-                {/* {user.familyname} */}
-                NOM FAMILLE
-              </Text>
             </Flex>
             <Heading fontStyle="italic" alignSelf="center">
-              {/* {activity.name} */}
+              {activity.name}
               NOM ACTIVITE
             </Heading>
             <Flex
@@ -93,21 +72,21 @@ function CardActivity({ activity }) {
               <Flex gap="2">
                 <Image src={liste} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
-                  {/* {activity.category} */}
+                  {activity.category}
                   Catégorie
                 </Text>
               </Flex>
               <Flex gap="2">
                 <Image src={histoire} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
-                  {/* {activity.duration} */}
+                  {activity.duration}
                   Durée
                 </Text>
               </Flex>
               <Flex gap="2">
                 <Image src={enfants} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
-                  {/* {activity.ageGroup} */}
+                  {activity.ageGroup}
                   Tranche d'âge
                 </Text>
               </Flex>
@@ -129,8 +108,7 @@ function CardActivity({ activity }) {
         <ModalContent>
           <ModalHeader p="0">
             <Box
-              bgImage={activityCookies}
-              // bgImage={activity.pictureActivity}
+              bgImage={activity.pictureActivity}
               bgRepeat="no-repeat"
               bgSize="cover"
               bgPos="center"
@@ -142,10 +120,6 @@ function CardActivity({ activity }) {
                     size="2xl"
                     // src={user.avatarUrl}
                   />
-                  <Text alignSelf="end" fontSize="6xl" color="#6E41E2">
-                    {/* {user.familyname} */}
-                    NOM FAMILLE
-                  </Text>
                 </Flex>
                 <Text
                   fontStyle="italic"
@@ -153,8 +127,7 @@ function CardActivity({ activity }) {
                   fontSize="7xl"
                   textShadow="2px 2px grey"
                 >
-                  {/* {activity.name} */}
-                  NOM ACTIVITE
+                  {activity.name}
                 </Text>
               </Flex>
             </Box>
@@ -169,31 +142,19 @@ function CardActivity({ activity }) {
             <Flex justifyContent="space-around" w="100%" flexWrap="wrap">
               <Flex gap="5">
                 <Image src={liste} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.category} */}
-                  Catégorie
-                </Text>
+                <Text fontSize="3xl">{activity.category}</Text>
               </Flex>
               <Flex gap="5">
                 <Image src={enfants} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.ageGroup} */}
-                  Tranche d'âge
-                </Text>
+                <Text fontSize="3xl">{activity.ageGroup}</Text>
               </Flex>
               <Flex gap="5">
                 <Image src={histoire} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.duration} */}
-                  Durée
-                </Text>
+                <Text fontSize="3xl">{activity.duration}</Text>
               </Flex>
               <Flex gap="5">
                 <Image src={niveau} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.ecologicalLevel} */}
-                  Niveau
-                </Text>
+                <Text fontSize="3xl">{activity.ecologicalLevel}</Text>
               </Flex>
               <Flex gap="5">
                 <Image src={createurDeContenu} w="50px" />
@@ -218,11 +179,7 @@ function CardActivity({ activity }) {
               >
                 <Heading>Matériels : </Heading>
                 <Text alignSelf="center" fontSize="2xl">
-                  {/* {activity.requirements} */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquid voluptatum quidem rem fugiat nostrum vitae accusamus
-                  delectus in? Doloremque corporis nostrum odio at autem eos
-                  maiores aspernatur quam ea accusantium.
+                  {activity.requirements}
                 </Text>
               </Flex>
               <Flex
@@ -238,11 +195,7 @@ function CardActivity({ activity }) {
               >
                 <Heading>Détails : </Heading>
                 <Text alignSelf="center" fontSize="2xl">
-                  {/* {activity.description} */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquid voluptatum quidem rem fugiat nostrum vitae accusamus
-                  delectus in? Doloremque corporis nostrum odio at autem eos
-                  maiores aspernatur quam ea accusantium.
+                  {activity.description}
                 </Text>
               </Flex>
             </Flex>

@@ -1,10 +1,13 @@
 import logoactivite from "../assets/bglogo.png";
-import { Box, Container, Text } from "@chakra-ui/react";
+import { Box, Container, Text, Flex } from "@chakra-ui/react";
+import CarouselGlobalActivitiesPages from "../components/CarouselGlobalActivitiesPages";
+
+import background from "../assets/background.png";
 
 export default function ActivitesGlobales() {
   return (
     <>
-      <Box>
+      <Box bgImage={background} bgRepeat="no-repeat" bgSize="cover">
         <Container
           bgImage={logoactivite}
           bgRepeat="repeat"
@@ -13,31 +16,30 @@ export default function ActivitesGlobales() {
           h="60vh"
           maxW="100vw"
         ></Container>
-        <Container mt="3rem" ml="10rem">
+        <Flex mt="3rem" flexDirection="column">
           <Text color={"green.500"} fontSize={{ base: "sm", sm: "2xl" }}>
             Recettes{" "}
           </Text>
-          <Box>{/*{CardActivity.map((card) => )}*/}</Box>
-        </Container>
-        <Container mt="3rem" ml="10rem">
-          {" "}
+          <CarouselGlobalActivitiesPages genre={"food"} />
+        </Flex>
+        <Flex mt="3rem" flexDirection="column">
           <Text color={"green.500"} fontSize={{ base: "sm", sm: "2xl" }}>
-            Cosmetiques{" "}
+            Cosmétiques{" "}
           </Text>
-          <Box>{/*{CardActivity.map((card) => )}*/}</Box>{" "}
-        </Container>
-        <Container mt="3rem" ml="10rem">
+          <CarouselGlobalActivitiesPages genre={"Hygiène"} />
+        </Flex>
+        <Flex mt="3rem" flexDirection="column">
           <Text color={"green.500"} fontSize={{ base: "sm", sm: "2xl" }}>
             Produits Entretiens{" "}
           </Text>
-          <Box>{/*{CardActivity.map((card) => )}*/}</Box>
-        </Container>
-        <Container mt="3rem" ml="10rem">
+          <CarouselGlobalActivitiesPages genre={"Entretien"} />
+        </Flex>
+        <Flex mt="3rem" flexDirection="column">
           <Text color={"green.500"} fontSize={{ base: "sm", sm: "2xl" }}>
-            Jardins{" "}
+            Jardin{" "}
           </Text>
-          <Box>{/*{CardActivity.map((card) => )}*/}</Box>
-        </Container>
+          <CarouselGlobalActivitiesPages genre={"Jardin"} />
+        </Flex>
       </Box>
     </>
   );
