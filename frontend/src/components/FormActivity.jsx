@@ -10,10 +10,12 @@ import {
   FormControl,
   Select,
   Heading,
+  Image
 } from "@chakra-ui/react";
 import fond from "../assets/background.png";
 import { useState } from "react";
 import axios from "axios";
+import activity from "../assets/activity.png";
 
 function FormActivity() {
   const [name, setName] = useState("");
@@ -50,12 +52,12 @@ function FormActivity() {
     e.preventDefault();
     axios.post("http://localhost:4000/api/activities", {
       name: name,
-      duration:duration,
+      duration: duration,
       category: category,
       ageGroup: ageGroup,
       ecologicalLevel: ecologicalLevel,
       description: description,
-      requirement: requirement
+      requirement: requirement,
     });
   };
 
@@ -86,11 +88,14 @@ function FormActivity() {
                   lineHeight={1.1}
                   fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
                 >
-                  Partage tes supers idées d'activité avec le reste de la communauté.{" "}
+                  Partage tes activités préférées.{" "}
                 </Heading>
-                <Text color={"gray.500"} fontSize={{ base: "sm", sm: "xl" }}>
-                  N'oublie pas d'indiquer toutes les informations nécessaires !{" "}
-                </Text>
+                  <Image
+                    objectFit="cover"
+                    boxSize="100%"
+                    h="300px"
+                    src={activity}
+                  />
               </Stack>
               <Box as={"form"} mt={10}>
                 <Stack spacing={4}>
