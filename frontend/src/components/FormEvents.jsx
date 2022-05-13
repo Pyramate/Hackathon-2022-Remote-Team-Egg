@@ -8,7 +8,7 @@ import {
   FormControl,
   Select,
   Heading,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import fond from "../assets/background.png";
 import { useState } from "react";
@@ -25,6 +25,7 @@ function FormEvents() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [eventLocation, setEventLocation] = useState("");
+  const [pictureActivity, setPictureActivity] = useState("");
 
   function handleName(e) {
     setName(e.target.value);
@@ -57,6 +58,10 @@ function FormEvents() {
     setRequirement(e.target.value);
   }
 
+  function handlePicture(e) {
+    setPictureActivity(e.target.value);
+  }
+
   const postEvent = (e) => {
     e.preventDefault();
     axios.post("http://localhost:4000/api/events", {
@@ -69,6 +74,7 @@ function FormEvents() {
       ecologicalLevel: ecologicalLevel,
       description: description,
       requirement: requirement,
+      pictureActivity: pictureActivity
     });
   };
 
@@ -85,23 +91,25 @@ function FormEvents() {
               spacing={{ base: 8 }}
               maxW={{ lg: "2xl" }}
             >
-              <Stack spacing={4}>
+              <Stack spacing={2}>
                 <Heading
+                  alignSelf="center"
+                  w="500px"
                   color={"green.800"}
                   lineHeight={1.1}
                   fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
                 >
                   Partage tes évènements préférés.{" "}
                 </Heading>
-                  <Image
-                    objectFit="cover"
-                    boxSize="100%"
-                    h="300px"
-                    src={activity}
-                  />
+                <Image
+                  objectFit="cover"
+                  boxSize="100%"
+                  h="300px"
+                  src={activity}
+                />
               </Stack>
               <Box as={"form"} mt={10}>
-                <Stack spacing={4}>
+                <Stack spacing={2}>
                   <Flex direction="column" justify="20px">
                     <Stack spacing={4}>
                       <Input
@@ -150,8 +158,8 @@ function FormEvents() {
                         onChange={handleEventLocation}
                         mr="1rem"
                       />{" "}
-                      <Input
-                        placeholder="Catégorie"
+                      <Select
+                        name="Catégorie"
                         bg={"gray.100"}
                         border={0}
                         color={"gray.500"}
@@ -160,7 +168,15 @@ function FormEvents() {
                         }}
                         onChange={handleCategory}
                         mr="1rem"
-                      />{" "}
+                      >
+                        <option value="" disabled selected>
+                          Catégorie
+                        </option>{" "}
+                        <option value="Sport">Sport</option>
+                        <option value="Recyclage">Recyclage</option>
+                        <option value="Entretien">Produits d'entretien</option>
+                        <option value="Jardin">Jardin</option>
+                      </Select>{" "}
                       <Select
                         name="Niveau Ecolo"
                         bg={"gray.100"}
@@ -210,7 +226,7 @@ function FormEvents() {
                           color: "gray.500",
                         }}
                         mr="1rem"
-                        h={200}
+                        h={150}
                         onChange={handleDescription}
                       />
                       <Input
@@ -219,28 +235,24 @@ function FormEvents() {
                         border={0}
                         color={"gray.500"}
                         _placeholder={{
-                          color: "gray.500"
+                          color: "gray.500",
                         }}
                         h={100}
                         onChange={handleRequirement}
                       />
+                      <Input
+                        placeholder="Photo (url)"
+                        bg={"gray.100"}
+                        border={0}
+                        color={"gray.500"}
+                        _placeholder={{
+                          color: "gray.500"
+                        }}
+                        onChange={handlePicture}
+                      />
                     </Stack>
                   </Flex>
                 </Stack>
-                <Button
-                  fontFamily={"heading"}
-                  mt={8}
-                  type="submit"
-                  w={"full"}
-                  bgGradient="linear(to-r, purple.400,purple.200)"
-                  color={"white"}
-                  _hover={{
-                    bgGradient: "linear(to-r, purple.200,purple.400)",
-                    boxShadow: "xl",
-                  }}
-                >
-                  Enregistrer
-                </Button>
               </Box>
             </Stack>
           </Container>
