@@ -112,7 +112,9 @@ export default function Header() {
           />
           <HStack spacing={12} alignItems={"center"}>
             <Box w="30%">
-              <Image src={Logo} alt="Ecolokids_logo" />
+              <Link href="/accueil">
+                <Image src={Logo} alt="Ecolokids_logo" />
+              </Link>
             </Box>
             <HStack
               as={"nav"}
