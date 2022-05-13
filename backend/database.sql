@@ -19,6 +19,7 @@ CREATE TABLE `ecolokids_db`.`activities` (
   `ecologicalLevel` VARCHAR(255) NOT NULL,
   `description` VARCHAR(5000) NOT NULL,
   `requirements` VARCHAR(5000) NULL,
+  `userId` VARCHAR(255) NOT NULL,
   `pictureActivity` VARCHAR(255) NULL,
   PRIMARY KEY (`id`));
 
@@ -33,6 +34,7 @@ CREATE TABLE `ecolokids_db`.`events` (
   `ecologicalLevel` VARCHAR(255) NOT NULL,
   `description` VARCHAR(5000) NOT NULL,
   `requirements` VARCHAR(5000) NULL,
+  `userId` VARCHAR(255) NOT NULL,
   `pictureActivity` VARCHAR(255) NULL,
   PRIMARY KEY (`id`));
 
