@@ -15,8 +15,8 @@ function App() {
         <Route path="/accueil" element={<Home />} />
         <Route path="/form-activity" element={<FormActivity />} />
         <Route path="/form-events" element={<FormEvents />} />
-        {/* <Route path="/activites" element={<Activites_Globales />} />
-        <Route path="/evenements" element={<Evenements_Globales />} />
+        <Route path="/activites" element={<ActivitesGlobales />} />
+        {/* <Route path="/evenements" element={<Evenements_Globales />} />
         <Route path="/dashboard" element={<Dashboard />} /> */}
       </Routes>
     </Router>
