@@ -1,7 +1,6 @@
 import {
   Input,
   Stack,
-  Button,
   Flex,
   Container,
   Box,
@@ -193,8 +192,9 @@ function FormActivity() {
                     </Stack>
                   </Flex>
                 </Stack>
-                <Button
-                  fontFamily={'heading'}
+                {/* <Button
+                  onClick={onClose}
+                  fontFamily={"heading"}
                   mt={8}
                   type="submit"
                   w={'full'}
@@ -206,7 +206,7 @@ function FormActivity() {
                   }}
                 >
                   Enregistrer
-                </Button>
+                </Button> */}
               </Box>
             </Stack>
           </Container>

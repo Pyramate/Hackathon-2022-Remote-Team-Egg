@@ -10,6 +10,7 @@ export default function ActivitesGlobales() {
     <>
       <Header />
       <Box bgImage={background} bgRepeat="no-repeat" bgSize="cover">
+        <Header />
         <Container
           bgImage={logoactivite}
           bgRepeat="repeat"
@@ -22,7 +23,7 @@ export default function ActivitesGlobales() {
           <Text color={'green.500'} fontSize={{ base: 'sm', sm: '2xl' }}>
             Recettes{' '}
           </Text>
-          <CarouselGlobalActivitiesPages genre={'Recette'} />
+          <CarouselGlobalActivitiesPages genre={'food'} />
         </Flex>
         <Flex mt="3rem" flexDirection="column">
           <Text color={'green.500'} fontSize={{ base: 'sm', sm: '2xl' }}>
