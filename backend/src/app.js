@@ -90,6 +90,7 @@ app.post("/api/users", (req, res) => {
         ecologicalLevel,
         avatarUrl: userAvatar,
       });
+      // localStorage.setItem("userId", insertId);
     })
     .catch((err) => {
       console.error(err);
@@ -192,6 +193,7 @@ app.post("/api/activities", (req, res) => {
     requirements,
     pictureActivity,
   } = req.body;
+  const userId = `https://avatars.dicebear.com/api/avataaars/:${pictureActivity}.svg?background=%230000ff`;
 
   const db = connection.promise();
   const validationErrors = Joi.object({
@@ -200,6 +202,7 @@ app.post("/api/activities", (req, res) => {
     category: Joi.string().max(255).required(),
     ageGroup: Joi.string().max(255).required(),
     ecologicalLevel: Joi.string().max(255).required(),
+    userId: Joi.string().max(255).required(),
     description: Joi.string().max(5000).required(),
     requirements: Joi.string().max(5000),
     pictureActivity: Joi.string().max(5000),
@@ -210,6 +213,7 @@ app.post("/api/activities", (req, res) => {
       category,
       ageGroup,
       ecologicalLevel,
+      userId,
       description,
       requirements,
       pictureActivity,
@@ -219,13 +223,14 @@ app.post("/api/activities", (req, res) => {
   if (validationErrors) return res.status(422).json({ validationErrors });
   return db
     .query(
-      "INSERT INTO activities (name, duration, category, ageGroup, ecologicalLevel, description, requirements, pictureActivity) VALUES (?, ?, ?, ?, ?,?,?,?)",
+      "INSERT INTO activities (name, duration, category, ageGroup, ecologicalLevel, userId, description, requirements, pictureActivity) VALUES (?, ?, ?, ?,?, ?,?,?,?)",
       [
         name,
         duration,
         category,
         ageGroup,
         ecologicalLevel,
+        userId,
         description,
         requirements,
         pictureActivity,
@@ -239,6 +244,7 @@ app.post("/api/activities", (req, res) => {
         category,
         ageGroup,
         ecologicalLevel,
+        userId,
         description,
         requirements,
         pictureActivity,
@@ -256,6 +262,7 @@ app.put("/api/activities/:id", (req, res) => {
     category,
     ageGroup,
     ecologicalLevel,
+    userId,
     description,
     requirements,
     pictureActivity,
@@ -274,6 +281,7 @@ app.put("/api/activities/:id", (req, res) => {
         category: Joi.string().max(255),
         ageGroup: Joi.string().max(255),
         ecologicalLevel: Joi.string().max(255),
+        userId: Joi.string().max(255),
         description: Joi.string().max(5000),
         requirements: Joi.string().max(5000),
         pictureActivity: Joi.string().max(5000),
@@ -284,6 +292,7 @@ app.put("/api/activities/:id", (req, res) => {
           category,
           ageGroup,
           ecologicalLevel,
+          userId,
           description,
           requirements,
           pictureActivity,
@@ -365,6 +374,7 @@ app.post("/api/events", (req, res) => {
     description,
     pictureActivity,
   } = req.body;
+  const userId = `https://avatars.dicebear.com/api/avataaars/:${pictureActivity}.svg?background=%230000ff`;
 
   const db = connection.promise();
   const validationErrors = Joi.object({
@@ -375,6 +385,7 @@ app.post("/api/events", (req, res) => {
     eventLocation: Joi.string().max(255).required(),
     ageGroup: Joi.string().max(255).required(),
     ecologicalLevel: Joi.string().max(255).required(),
+    userId: Joi.string().max(255).required(),
     description: Joi.string().max(255).required(),
     pictureActivity: Joi.string().max(255),
   }).validate(
@@ -386,6 +397,7 @@ app.post("/api/events", (req, res) => {
       eventLocation,
       ageGroup,
       ecologicalLevel,
+      userId,
       description,
       pictureActivity,
     },
@@ -394,7 +406,7 @@ app.post("/api/events", (req, res) => {
   if (validationErrors) return res.status(422).json({ validationErrors });
   return db
     .query(
-      "INSERT INTO events (name, startDate, endDate, category, eventLocation, ageGroup, ecologicalLevel, description, pictureActivity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO events (name, startDate, endDate, category, eventLocation, ageGroup, ecologicalLevel, userId, description, pictureActivity) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?)",
       [
         name,
         startDate,
@@ -403,6 +415,7 @@ app.post("/api/events", (req, res) => {
         eventLocation,
         ageGroup,
         ecologicalLevel,
+        userId,
         description,
         pictureActivity,
       ]
@@ -417,6 +430,7 @@ app.post("/api/events", (req, res) => {
         eventLocation,
         ageGroup,
         ecologicalLevel,
+        userId,
         description,
         pictureActivity,
       });
@@ -435,6 +449,7 @@ app.put("/api/events/:id", (req, res) => {
     eventLocation,
     ageGroup,
     ecologicalLevel,
+    userId,
     description,
     pictureActivity,
   } = req.body;
@@ -452,6 +467,8 @@ app.put("/api/events/:id", (req, res) => {
       eventLocation: Joi.string().max(255),
       ageGroup: Joi.string().max(255),
       ecologicalLevel: Joi.string().max(255),
+      userId: Joi.string().max(255),
+
       description: Joi.string().max(255),
       pictureActivity: Joi.string().max(255),
     }).validate(
@@ -463,6 +480,7 @@ app.put("/api/events/:id", (req, res) => {
         eventLocation,
         ageGroup,
         ecologicalLevel,
+        userId,
         description,
         pictureActivity,
       },
