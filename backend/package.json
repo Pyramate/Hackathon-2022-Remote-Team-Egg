@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "hackathon-2022-remote-team-egg": "file:..",
     "joi": "^17.6.0",
     "mysql2": "^2.3.3",
     "template-fullstack": "file:.."
