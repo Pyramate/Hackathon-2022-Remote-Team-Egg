@@ -9,6 +9,7 @@ import {
   useColorModeValue,
   Switch,
   Button,
+  Badge,
 } from '@chakra-ui/react';
 import dailyChallenge from '../assets/dailychallenge.png';
 
@@ -55,29 +56,29 @@ export default function DailyChallenge({ challenges }) {
               color={'purple.700'}
               pl={2}
             >
-              {/* {challenges.name} */}
-              Challenge du jour :
+              Challenge du jour : {challenges.name}
             </Heading>
 
             <Text
               fontSize={'xl'}
               color={useColorModeValue('gray.700', 'gray.400')}
               px={3}
+              noOfLines={3}
             >
-              {' '}
-              Le challenge here!
-              {/* {challenges.description} */}
+              {challenges.description}
             </Text>
-            <Text
-              fontSize={'l'}
-              color={useColorModeValue('gray.700', 'gray.400')}
-              px={3}
-            >
-              {' '}
-              Ce challenge pourrait te rapporter :
-              {/* {challenges.pointsScored} */}
-            </Text>
-
+            <Flex>
+              <Text
+                fontSize={'l'}
+                color={useColorModeValue('green.700', 'gray.400')}
+                px={3}
+              >
+                Ce challenge pourrait te rapporter :
+              </Text>
+              <Badge colorScheme="green">
+                {challenges.pointsScored} points
+              </Badge>
+            </Flex>
             <Stack
               width={'100%'}
               direction={'row'}

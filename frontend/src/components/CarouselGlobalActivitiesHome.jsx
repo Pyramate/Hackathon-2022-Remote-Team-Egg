@@ -5,8 +5,8 @@ import { Button, Flex, Link } from '@chakra-ui/react';
 import CardActivity from './CardActivity';
 
 export default function CarouselGlobalActivitiesHome({
-  limit = null,
   isOnHome = false,
+  genre = null,
 }) {
   const [activities, setActivities] = useState([]);
 
@@ -32,9 +32,9 @@ export default function CarouselGlobalActivitiesHome({
       overflow="auto"
       gap={6}
     >
-      {limit
+      {genre
         ? activities
-            .slice(0, limit)
+            .filter((activity) => activity.category === genre)
             .map((activity) => (
               <CardActivity activity={activity} key={activity.id} />
             ))

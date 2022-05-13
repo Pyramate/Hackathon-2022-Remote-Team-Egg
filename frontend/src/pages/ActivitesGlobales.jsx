@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import CarouselGlobalActivitiesPages from '../components/CarouselGlobalActivitiesPages';
+import CarouselGlobalActivitiesHome from '../components/CarouselGlobalActivitiesHome';
 import Header from '../components/Header';
 
 import background from '../assets/background.png';
@@ -45,27 +46,26 @@ export default function ActivitesGlobales() {
             <Text color={'green.500'} fontSize="4xl" fontWeight="600" ml="5rem">
               Recettes
             </Text>
-            <CarouselGlobalActivitiesPages genre={'food'} />
+            <CarouselGlobalActivitiesHome isOnHome={true} genre={'Recette'} />
           </Flex>
           <Flex mt="3rem" flexDirection="column">
             <Text color={'green.500'} fontSize="4xl" fontWeight="600" ml="5rem">
               Cosmétiques{' '}
             </Text>
 
-            <CarouselGlobalActivitiesPages genre={'Hygiène'} />
+            <CarouselGlobalActivitiesHome isOnHome={true} genre={'Hygiène'} />
           </Flex>
           <Flex mt="3rem" flexDirection="column">
             <Text color={'green.500'} fontSize="4xl" fontWeight="600" ml="5rem">
               Produits Entretiens{' '}
             </Text>
-
-            <CarouselGlobalActivitiesPages genre={'Entretien'} />
+            <CarouselGlobalActivitiesHome isOnHome={true} genre={'Entretien'} />
           </Flex>
           <Flex mt="3rem" flexDirection="column" id="garden">
             <Text color={'green.500'} fontSize="4xl" fontWeight="600" ml="5rem">
               Jardin{' '}
             </Text>
-            <CarouselGlobalActivitiesPages genre={'Jardin'} />
+            <CarouselGlobalActivitiesHome isOnHome={true} genre={'Jardin'} />
           </Flex>
         </Flex>
       </Box>

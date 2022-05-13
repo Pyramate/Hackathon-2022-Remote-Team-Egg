@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Box,
   Flex,
@@ -20,16 +20,16 @@ import {
   ModalOverlay,
   ModalContent,
   ModalBody,
-} from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
-import Logo from "../assets/ecolokids.png";
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import Logo from '../assets/ecolokids.png';
 
-import FormActivity from "./FormActivity";
-import FormEvents from "./FormEvents";
-import FormChallenge from "./FormChallenge";
+import FormActivity from './FormActivity';
+import FormEvents from './FormEvents';
+import FormChallenge from './FormChallenge';
 
-const Links = ["Activités", "Evénements", "Dashboard"];
-const Linkto = ["/activites", "/events", "/dashboard"];
+const Links = ['Activités', 'Evénements', 'Dashboard'];
+const Linkto = ['/activites', '/events', '/dashboard'];
 
 const NavLink = ({ children }) => (
   <Link
@@ -37,14 +37,14 @@ const NavLink = ({ children }) => (
     py={1}
     size="lg"
     fontWeight="medium"
-    rounded={"md"}
+    rounded={'md'}
     _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("#6E41E2", "white"),
-      color: "white",
-      fontWeight: "700",
+      textDecoration: 'none',
+      bg: useColorModeValue('#6E41E2', 'white'),
+      color: 'white',
+      fontWeight: '700',
     }}
-    href={"#"}
+    href={'#'}
   >
     {children}
   </Link>
@@ -67,39 +67,39 @@ export default function Header() {
 
   return (
     <>
-      <Box bg={useColorModeValue("white", "gray.900")} px={4}>
-        <Flex h={24} alignItems={"center"} justifyContent={"space-between"}>
+      <Box bg={useColorModeValue('white', 'gray.900')} px={4}>
+        <Flex h={24} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
-            size={"lg"}
+            size={'lg'}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={12} alignItems={"center"}>
+          <HStack spacing={12} alignItems={'center'}>
             <Box w="30%">
               <Link href="/accueil">
                 <Image src={Logo} alt="Ecolokids_logo" />
               </Link>
             </Box>
             <HStack
-              as={"nav"}
+              as={'nav'}
               spacing={4}
-              display={{ base: "none", md: "flex" }}
+              display={{ base: 'none', md: 'flex' }}
             >
               <Link
                 px={3}
                 py={1}
                 size="lg"
                 fontWeight="600"
-                rounded={"md"}
+                rounded={'md'}
                 _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("#6E41E2", "white"),
-                  color: "white",
-                  fontWeight: "600",
+                  textDecoration: 'none',
+                  bg: useColorModeValue('#6E41E2', 'white'),
+                  color: 'white',
+                  fontWeight: '600',
                 }}
-                href={"/activites"}
+                href={'/activites'}
               >
                 Activités
               </Link>
@@ -108,14 +108,14 @@ export default function Header() {
                 py={1}
                 size="lg"
                 fontWeight="600"
-                rounded={"md"}
+                rounded={'md'}
                 _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("#6E41E2", "white"),
-                  color: "white",
-                  fontWeight: "600",
+                  textDecoration: 'none',
+                  bg: useColorModeValue('#6E41E2', 'white'),
+                  color: 'white',
+                  fontWeight: '600',
                 }}
-                href={"/evenements"}
+                href={'/evenements'}
               >
                 Evénements à venir
               </Link>
@@ -124,41 +124,41 @@ export default function Header() {
                 py={1}
                 size="lg"
                 fontWeight="600"
-                rounded={"md"}
+                rounded={'md'}
                 _hover={{
-                  textDecoration: "none",
-                  bg: useColorModeValue("#6E41E2", "white"),
-                  color: "white",
-                  fontWeight: "600",
+                  textDecoration: 'none',
+                  bg: useColorModeValue('#6E41E2', 'white'),
+                  color: 'white',
+                  fontWeight: '600',
                 }}
-                href={"/dashboard"}
+                href={'/dashboard'}
               >
                 L'espace de ma Tribu
               </Link>
             </HStack>
           </HStack>
-          <Flex alignItems={"center"} justifyContent="space-around" minW="25%">
+          <Flex alignItems={'center'} justifyContent="space-around" minW="25%">
             <Menu>
               <MenuButton
-                variant={"solid"}
+                variant={'solid'}
                 color="white"
-                bg={"#6E41E2"}
-                size={"lg"}
+                bg={'#6E41E2'}
+                size={'lg'}
                 as={Button}
                 leftIcon={<AddIcon />}
-                _hover={{ bg: "#9b76f8" }}
+                _hover={{ bg: '#9b76f8' }}
               >
                 Partage ton initiative
               </MenuButton>
               <Menu>
                 <MenuButton
                   as={Button}
-                  rounded={"full"}
-                  variant={"link"}
+                  rounded={'full'}
+                  variant={'link'}
                   minW={0}
                 >
                   <Avatar
-                    size={"md"}
+                    size={'md'}
                     src="https://avatars.dicebear.com/api/avataaars/:seed.svg"
                   />
                 </MenuButton>
@@ -189,28 +189,12 @@ export default function Header() {
                     <ModalContent>
                       <ModalBody textAlign="center">
                         <FormActivity />
-                        <Button
-                          justifySelf="center"
-                          onClick={onClose}
-                          fontFamily={"heading"}
-                          mt={2}
-                          type="submit"
-                          w={"50%"}
-                          bgGradient="linear(to-r, purple.400,purple.200)"
-                          color={"white"}
-                          _hover={{
-                            bgGradient: "linear(to-r, purple.200,purple.400)",
-                            boxShadow: "xl",
-                          }}
-                        >
-                          Enregistrer
-                        </Button>
                       </ModalBody>
                     </ModalContent>
                   </Modal>
                 </MenuItem>
                 <MenuItem>
-                  {" "}
+                  {' '}
                   <Button
                     onClick={() => {
                       setOverlay(<OverlayOne />);
@@ -229,28 +213,12 @@ export default function Header() {
                     <ModalContent>
                       <ModalBody textAlign="center">
                         <FormEvents />
-                        <Button
-                          justifySelf="center"
-                          onClick={onClose}
-                          fontFamily={"heading"}
-                          mt={2}
-                          type="submit"
-                          w={"50%"}
-                          bgGradient="linear(to-r, purple.400,purple.200)"
-                          color={"white"}
-                          _hover={{
-                            bgGradient: "linear(to-r, purple.200,purple.400)",
-                            boxShadow: "xl",
-                          }}
-                        >
-                          Enregistrer
-                        </Button>
                       </ModalBody>
                     </ModalContent>
                   </Modal>
                 </MenuItem>
                 <MenuItem>
-                  {" "}
+                  {' '}
                   <Button
                     onClick={() => {
                       setOverlay(<OverlayOne />);
@@ -269,22 +237,6 @@ export default function Header() {
                     <ModalContent>
                       <ModalBody textAlign="center">
                         <FormChallenge />
-                        <Button
-                          justifySelf="center"
-                          onClick={onClose}
-                          fontFamily={"heading"}
-                          mt={2}
-                          type="submit"
-                          w={"50%"}
-                          bgGradient="linear(to-r, purple.400,purple.200)"
-                          color={"white"}
-                          _hover={{
-                            bgGradient: "linear(to-r, purple.200,purple.400)",
-                            boxShadow: "xl",
-                          }}
-                        >
-                          Enregistrer
-                        </Button>
                       </ModalBody>
                     </ModalContent>
                   </Modal>
@@ -295,8 +247,8 @@ export default function Header() {
         </Flex>
 
         {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
