@@ -9,112 +9,94 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
+  Badge,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Stack,
   useColorModeValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { FaRegClock, FaAward, FaChild, FaClipboardList } from "react-icons/fa";
+import { FaRegClock, FaAward, FaChild, FaClipboardList } from 'react-icons/fa';
 
 function CardActivity({ activity }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Flex flexDirection="column" h="500px">
-      <Flex
-        bgColor="white"
-        flexDirection="column"
-        align="center"
-        h="450px"
-        w="400px"
-        borderRadius="lg"
-        bg={useColorModeValue("white", "gray.900")}
-        boxShadow={"2xl"}
-      >
+    <>
+      <Flex py={6}>
         <Box
-          h="40%"
-          w="100%"
-          borderRadius="lg"
-          bgImage={activity.pictureActivity}
-          bgRepeat="no-repeat"
-          bgSize="cover"
-          bgPos="center"
+          w="full"
+          bg={useColorModeValue('white', 'gray.900')}
+          boxShadow={'2xl'}
+          rounded={'md'}
+          p={6}
+          overflow={'hidden'}
         >
-          <Flex
-            h="290px"
-            mt="9em"
-            gap="2"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
-            <Flex gap="6" ml="1rem">
-              <Avatar
-                border="2px solid white"
-                alignSelf="flex-start"
-                size="lg"
-                src={activity.userId}
-              />
-            </Flex>
-            <Heading fontFamily={"body"} fontSize="3xl" alignSelf="center">
+          <Box
+            h={'210px'}
+            bg={'gray.100'}
+            mt={-6}
+            mx={-6}
+            mb={6}
+            pos={'relative'}
+            bgImage={activity.pictureActivity}
+          ></Box>
+          <Stack maxW="400px">
+            <Text
+              color={'green.500'}
+              textTransform={'uppercase'}
+              fontWeight={800}
+              fontSize={'sm'}
+              letterSpacing={1.1}
+            >
+              ACTIVITÉ
+            </Text>
+            <Heading color="gray.700" fontSize={'xl'} fontFamily={'Heebo'}>
               {activity.name}
             </Heading>
-            <Flex
-              justifyContent="space-around"
-              w="90%"
-              alignSelf="center"
-              flexWrap="wrap"
-              gap="2"
-            >
-              <Flex gap="2" placeItems="center">
-                <FaClipboardList color="#6E41E2" size="30px" />
-                <Text
-                  fontFamily={"body"}
-                  alignSelf="center"
-                  align="center"
-                  fontSize={"xl"}
-                  color={useColorModeValue("gray.700", "gray.400")}
-                >
+            <Text color={'gray.500'} noOfLines={2}>
+              {activity.description}
+            </Text>
+          </Stack>
+          <Stack
+            mt={6}
+            direction={'row'}
+            spacing={4}
+            align={'center'}
+            justify={'space between'}
+            width="100%"
+          >
+            <Avatar src={activity.userId} alt={'Author'} />
+            <Stack direction={'column'} spacing={0} fontSize={'lg'}>
+              <Stack direction={'row'} spacing={2} fontSize={'lg'}>
+                <FaClipboardList color="#6E41E2" size="20px" />
+                <Badge colorScheme="orange" w="fit-content" size="md">
                   {activity.category}
-                </Text>
-              </Flex>
-              <Flex gap="2" placeItems="center">
-                <FaRegClock color="#6E41E2" size="30px" />
-                <Text
-                  fontFamily={"body"}
-                  alignSelf="center"
-                  align="center"
-                  fontSize={"xl"}
-                  color={useColorModeValue("gray.700", "gray.400")}
-                >
+                </Badge>
+                <FaRegClock color="#6E41E2" size="20px" />
+
+                <Badge colorScheme="orange" w="fit-content" size="md">
                   {activity.duration}
-                </Text>
-              </Flex>
-              <Flex gap="2" placeItems="center">
-                <FaChild color="#6E41E2" size="30px" />
-                <Text
-                  fontFamily={"body"}
-                  alignSelf="center"
-                  align="center"
-                  fontSize={"xl"}
-                  color={useColorModeValue("gray.700", "gray.400")}
-                >
+                </Badge>
+                <FaChild color="#6E41E2" size="20px" />
+
+                <Badge colorScheme="purple" w="fit-content" size="md">
                   {activity.ageGroup}
-                </Text>
-              </Flex>
-            </Flex>
+                </Badge>
+              </Stack>
+            </Stack>
             <Button
-              fontFamily={"body"}
+              fontFamily={'body'}
               borderRadius="lg"
               onClick={onOpen}
               colorScheme="purple"
-              w="40%"
               alignSelf="center"
-              fontSize={"md"}
+              fontSize={'md'}
             >
-              Voir plus de détails
+              Voir plus
             </Button>
-          </Flex>
+          </Stack>
         </Box>
       </Flex>
 
@@ -139,8 +121,8 @@ function CardActivity({ activity }) {
                 </Flex>
                 <Heading
                   alignSelf="center"
-                  fontSize={"6xl"}
-                  fontFamily={"body"}
+                  fontSize={'6xl'}
+                  fontFamily={'body'}
                 >
                   {activity.name}
                 </Heading>
@@ -157,25 +139,25 @@ function CardActivity({ activity }) {
             <Flex justifyContent="space-around" w="100%" flexWrap="wrap">
               <Flex gap="5" placeItems="center">
                 <FaClipboardList color="#6E41E2" size="60px" />
-                <Text fontSize={"4xl"} fontFamily={"body"}>
+                <Text fontSize={'4xl'} fontFamily={'body'}>
                   {activity.category}
                 </Text>
               </Flex>
               <Flex gap="5" placeItems="center">
                 <FaChild color="#6E41E2" size="60px" />
-                <Text fontSize={"4xl"} fontFamily={"body"}>
+                <Text fontSize={'4xl'} fontFamily={'body'}>
                   {activity.ageGroup}
                 </Text>
               </Flex>
               <Flex gap="5" placeItems="center">
                 <FaRegClock color="#6E41E2" size="60px" />
-                <Text fontSize={"4xl"} fontFamily={"body"}>
+                <Text fontSize={'4xl'} fontFamily={'body'}>
                   {activity.duration}
                 </Text>
               </Flex>
               <Flex gap="5" placeItems="center">
                 <FaAward color="#6E41E2" size="60px" />
-                <Text fontSize={"4xl"} fontFamily={"body"}>
+                <Text fontSize={'4xl'} fontFamily={'body'}>
                   {activity.ecologicalLevel}
                 </Text>
               </Flex>
@@ -183,16 +165,16 @@ function CardActivity({ activity }) {
 
             <Flex
               h="40%"
-              flexDirection={{ base: "column", xl: "row" }}
-              alignItems={{ base: "center", xl: "initial" }}
+              flexDirection={{ base: 'column', xl: 'row' }}
+              alignItems={{ base: 'center', xl: 'initial' }}
             >
               <Flex
-                w={{ base: "90%", xl: "100%" }}
+                w={{ base: '90%', xl: '100%' }}
                 m="1rem"
                 p="2rem"
                 borderRadius="lg"
-                bg={useColorModeValue("white", "gray.900")}
-                boxShadow={"2xl"}
+                bg={useColorModeValue('white', 'gray.900')}
+                boxShadow={'2xl'}
                 justifyContent="flex-start"
                 flexDirection="column"
                 gap="3"
@@ -203,12 +185,12 @@ function CardActivity({ activity }) {
                 </Text>
               </Flex>
               <Flex
-                w={{ base: "90%", xl: "100%" }}
+                w={{ base: '90%', xl: '100%' }}
                 m="1rem"
                 p="2rem"
                 borderRadius="lg"
-                bg={useColorModeValue("white", "gray.900")}
-                boxShadow={"2xl"}
+                bg={useColorModeValue('white', 'gray.900')}
+                boxShadow={'2xl'}
                 flexDirection="column"
                 justifyContent="flex-start"
                 gap="3"
@@ -236,7 +218,7 @@ function CardActivity({ activity }) {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </Flex>
+    </>
   );
 }
 

@@ -4,7 +4,10 @@ import { Button, Flex, Link } from '@chakra-ui/react';
 
 import CardActivity from './CardActivity';
 
-export default function CarouselGlobalActivitiesHome({ limit = null }) {
+export default function CarouselGlobalActivitiesHome({
+  limit = null,
+  isOnHome = false,
+}) {
   const [activities, setActivities] = useState([]);
 
   const getActivity = () => {
@@ -22,35 +25,22 @@ export default function CarouselGlobalActivitiesHome({ limit = null }) {
   }, []);
 
   return (
-    <Flex justifyContent="space-around" flexWrap="wrap">
-      <Flex justifyContent="space-around" flexWrap="wrap" minW="80%" gap="2">
-        {limit
-          ? activities
-              .slice(0, limit)
-              .map((activity) => (
-                <CardActivity activity={activity} key={activity.id} />
-              ))
-          : activities.map((activity) => (
+    <Flex
+      direction={isOnHome ? 'row' : 'column'}
+      justifyContent="space-between"
+      flexWrap="no-wrap"
+      overflow="auto"
+      gap={6}
+    >
+      {limit
+        ? activities
+            .slice(0, limit)
+            .map((activity) => (
               <CardActivity activity={activity} key={activity.id} />
-            ))}
-      </Flex>
-      <Link
-        fontStyle="italic"
-        href="/activites"
-        alignSelf="center"
-        w="20%"
-        textAlign="center"
-      >
-        <Button
-          color="white"
-          fontSize="2xl"
-          variant="solid"
-          colorScheme="purple"
-          h="50px"
-        >
-          Voir plus d'activités
-        </Button>
-      </Link>
+            ))
+        : activities.map((activity) => (
+            <CardActivity activity={activity} key={activity.id} />
+          ))}
     </Flex>
   );
 }

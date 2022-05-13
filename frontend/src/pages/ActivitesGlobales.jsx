@@ -23,7 +23,7 @@ export default function ActivitesGlobales() {
           <Text color={'green.500'} fontSize={{ base: 'sm', sm: '2xl' }}>
             Recettes{' '}
           </Text>
-          <CarouselGlobalActivitiesPages genre={'food'} />
+          <CarouselGlobalActivitiesPages genre={'Recette'} />
         </Flex>
         <Flex mt="3rem" flexDirection="column">
           <Text color={'green.500'} fontSize={{ base: 'sm', sm: '2xl' }}>

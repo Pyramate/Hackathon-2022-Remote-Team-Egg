@@ -25,12 +25,12 @@ export default function DailyChallenge({ challenges }) {
         <Stack
           borderWidth="1px"
           borderRadius="lg"
-          w={{ sm: '100%' }}
+          w="800px"
           height={{ sm: '476px', md: '20rem' }}
           direction={{ base: 'column', md: 'row' }}
           bg={useColorModeValue('white', 'gray.900')}
           boxShadow={'2xl'}
-          padding={2}
+          padding={4}
         >
           <Stack
             flex={1}
