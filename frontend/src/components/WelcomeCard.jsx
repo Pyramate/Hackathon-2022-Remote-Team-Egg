@@ -37,8 +37,7 @@ export default function WelcomeCard({ users }) {
               pl={2}
               px={3}
             >
-              Hello la tribu
-              {/* {users.familyname} */} !
+              {`Hello la tribu ${users.familyname} !`}
             </Heading>
 
             <Text
@@ -55,7 +54,7 @@ export default function WelcomeCard({ users }) {
               px={3}
             >
               {' '}
-              Niveau écolo de la tribu :{/* {users.ecologicalLevel} */}
+              Niveau écolo de la tribu :{users.ecologicalLevel}
             </Text>
             <Flex alignItems={'center'}>
               <Text px={3}>Bientôt le prochain niveau! </Text>

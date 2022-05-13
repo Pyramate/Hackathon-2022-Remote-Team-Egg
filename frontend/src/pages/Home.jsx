@@ -3,6 +3,7 @@ import { Flex, Box, Heading, Link, Button } from '@chakra-ui/react';
 import Background from '../assets/background.png';
 import '../styles/index.css';
 import WelcomeCard from '../components/WelcomeCard';
+import { getUser } from '../services/userService';
 import DailyChallenge from '../components/DailyChallenge';
 import CarouselGlobalActivitiesHome from '../components/CarouselGlobalActivitiesHome';
 import CarouselGlobalEventsHome from '../components/CarouselGlobalEventsHome';
@@ -14,7 +15,7 @@ export default function Home() {
       <Header />
       <Flex direction="column" w="90%" m="auto">
         <Flex direction="row" justifyContent="space-between">
-          <WelcomeCard />
+          <WelcomeCard users={getUser()} />
           <DailyChallenge />
         </Flex>
         <Flex direction="column">
