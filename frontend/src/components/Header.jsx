@@ -51,53 +51,19 @@ const NavLink = ({ children }) => (
 );
 
 export default function Header() {
-  // const OverlayActivity = () => (
-  //   <ModalOverlay
-  //     bg="blackAlpha.300"
-  //     backdropFilter="blur(10px) hue-rotate(90deg)"
-  //   />
-  // );
-
-  // const OverlayEvent = () => (
-  //   <ModalOverlay
-  //     bg="blackAlpha.300"
-  //     backdropFilter="blur(10px) hue-rotate(90deg)"
-  //   />
-  // );
-
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
       backdropFilter="blur(10px) hue-rotate(90deg)"
     />
   );
-
-  // const {
-  //   isOpen: { isOpenActivity },
-  //   onOpen: { onOpenActivity },
-  //   onClose: { onCloseActivity },
-  // } = useDisclosure();
-  // const {
-  //   isOpen: { isOpenEvent },
-  //   onOpen: { onOpenEvent },
-  //   onClose: { onCloseEvent },
-  // } = useDisclosure();
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [initiative, setInitiative] = useState("");
-
-  const handleInitiativeClick = (e) => {
-    debugger;
-    setInitiative(e.target.value);
-    onOpen();
-  };
-
-  const choices = ["Activity", "Events", "Challenge"];
-
-  // const [overlayActivity, setOverlayActivity] = useState(<OverlayActivity />);
-  // const [overlayEvent, setOverlayEvent] = useState(<OverlayEvent />);
   const [overlay, setOverlay] = useState(<OverlayOne />);
+
+  const modal1 = useDisclosure();
+  const modal2 = useDisclosure();
+  const modal3 = useDisclosure();
 
   return (
     <>
@@ -182,7 +148,7 @@ export default function Header() {
                 leftIcon={<AddIcon />}
                 _hover={{ bg: "#9b76f8" }}
               >
-                Part initiative
+                Partage ton initiative
               </MenuButton>
               <Menu>
                 <MenuButton
@@ -204,66 +170,22 @@ export default function Header() {
                 </MenuList>
               </Menu>
               <MenuList>
-                {choices.map((choice) => (
-                  <MenuItem>
-                    <Button
-                      onClick={() => {
-                        handleInitiativeClick();
-                      }}
-                    >
-                      {`Open ${choice} Modal`}
-                    </Button>
-                    <Modal
-                      isCentered
-                      isOpen={isOpen}
-                      onClose={onClose}
-                      size="4xl"
-                    >
-                      {overlay}
-                      <ModalContent>
-                        <ModalBody textAlign="center">
-                          {choice === "Activity" && <FormActivity />}
-                          {choice === "Events" && <FormEvents />}
-                          {choice === "Challenge" && <FormChallenge />}
-
-                          <Button
-                            justifySelf="center"
-                            onClick={onClose}
-                            fontFamily={"heading"}
-                            mt={2}
-                            type="submit"
-                            w={"50%"}
-                            bgGradient="linear(to-r, purple.400,purple.200)"
-                            color={"white"}
-                            _hover={{
-                              bgGradient: "linear(to-r, purple.200,purple.400)",
-                              boxShadow: "xl",
-                            }}
-                          >
-                            Enregistrer
-                          </Button>
-                        </ModalBody>
-                      </ModalContent>
-                    </Modal>
-                  </MenuItem>
-                ))}
-                {/* <MenuItem>
+                <MenuItem>
                   <Button
                     onClick={() => {
                       setOverlay(<OverlayOne />);
-                      onOpen();
+                      modal1.onOpen();
                     }}
                   >
                     Propose ton activité
                   </Button>
                   <Modal
                     isCentered
-                    isOpen={isOpen}
-                    onClose={onClose}
+                    isOpen={modal1.isOpen}
+                    onClose={modal1.onClose}
                     size="4xl"
                   >
                     {overlay}
-                    {console.log(<OverlayOne />)}
                     <ModalContent>
                       <ModalBody textAlign="center">
                         <FormActivity />
@@ -286,21 +208,21 @@ export default function Header() {
                       </ModalBody>
                     </ModalContent>
                   </Modal>
-                </MenuItem> */}
-                {/* <MenuItem>
+                </MenuItem>
+                <MenuItem>
                   {" "}
                   <Button
                     onClick={() => {
                       setOverlay(<OverlayOne />);
-                      onOpenEvent();
+                      modal2.onOpen();
                     }}
                   >
                     Propose ton évènement
                   </Button>
                   <Modal
                     isCentered
-                    isOpen={isOpenEvent}
-                    onClose={onCloseEvent}
+                    isOpen={modal2.isOpen}
+                    onClose={modal2.onClose}
                     size="4xl"
                   >
                     {overlay}
@@ -309,7 +231,7 @@ export default function Header() {
                         <FormEvents />
                         <Button
                           justifySelf="center"
-                          onClick={onCloseEvent}
+                          onClick={onClose}
                           fontFamily={"heading"}
                           mt={2}
                           type="submit"
@@ -326,21 +248,21 @@ export default function Header() {
                       </ModalBody>
                     </ModalContent>
                   </Modal>
-                </MenuItem> */}
-                {/* <MenuItem>
+                </MenuItem>
+                <MenuItem>
                   {" "}
                   <Button
                     onClick={() => {
                       setOverlay(<OverlayOne />);
-                      onOpen();
+                      modal3.onOpen();
                     }}
                   >
                     Propose ton challenge
                   </Button>
                   <Modal
                     isCentered
-                    isOpen={isOpen}
-                    onClose={onClose}
+                    isOpen={modal3.isOpen}
+                    onClose={modal3.onClose}
                     size="4xl"
                   >
                     {overlay}
@@ -366,7 +288,7 @@ export default function Header() {
                       </ModalBody>
                     </ModalContent>
                   </Modal>
-                </MenuItem> */}
+                </MenuItem>
               </MenuList>
             </Menu>
           </Flex>
