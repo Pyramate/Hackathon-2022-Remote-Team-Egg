@@ -26,6 +26,11 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import Logo from "../assets/ecolokids.png";
+
+import FormActivity from "./FormActivity";
+import FormEvent from "./FormEvents";
+import FormChallenge from "./FormChallenge";
+
 const Links = ["Activités", "Evénements", "Dashboard"];
 const Linkto = ["/activites", "/events", "/dashboard"];
 
@@ -172,15 +177,33 @@ export default function Header() {
                   >
                     Propose ton activité
                   </Button>
-                  <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                  <Modal
+                    isCentered
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    size="4xl"
+                  >
                     {overlay}
                     <ModalContent>
-                      <ModalHeader>Modal Title</ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody></ModalBody>
-                      <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                      </ModalFooter>
+                      <ModalBody textAlign="center">
+                        <FormActivity />
+                        <Button
+                          justifySelf="center"
+                          onClick={onClose}
+                          fontFamily={"heading"}
+                          mt={2}
+                          type="submit"
+                          w={"50%"}
+                          bgGradient="linear(to-r, purple.400,purple.200)"
+                          color={"white"}
+                          _hover={{
+                            bgGradient: "linear(to-r, purple.200,purple.400)",
+                            boxShadow: "xl",
+                          }}
+                        >
+                          Enregistrer
+                        </Button>
+                      </ModalBody>
                     </ModalContent>
                   </Modal>
                 </MenuItem>

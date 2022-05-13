@@ -8,7 +8,8 @@ import {
   FormControl,
   Select,
   Heading,
-  Image
+  Image,
+  useDisclosure,
 } from "@chakra-ui/react";
 import fond from "../assets/background.png";
 import { useState } from "react";
@@ -23,6 +24,8 @@ function FormActivity() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [requirement, setRequirement] = useState("");
+
+  const { onClose } = useDisclosure();
 
   function handleName(e) {
     setName(e.target.value);
@@ -63,7 +66,7 @@ function FormActivity() {
     <>
       <FormControl isRequired onSubmit={postActivity}>
         <Box bgImage={fond} bgRepeat="no-repeat" bgSize="cover">
-        <Container py={{ base: 5, sm: 10, lg: 15 }} z-index="10" h="auto">
+          <Container py={{ base: 5, sm: 10, lg: 15 }} z-index="10" h="auto">
             <Stack spacing={{ base: 10, md: 20 }}></Stack>
             <Stack
               bg={"none"}
@@ -80,12 +83,12 @@ function FormActivity() {
                 >
                   Partage tes activités préférées.{" "}
                 </Heading>
-                  <Image
-                    objectFit="cover"
-                    boxSize="100%"
-                    h="300px"
-                    src={activity}
-                  />
+                <Image
+                  objectFit="cover"
+                  boxSize="100%"
+                  h="300px"
+                  src={activity}
+                />
               </Stack>
               <Box as={"form"} mt={10}>
                 <Stack spacing={4}>
@@ -185,7 +188,7 @@ function FormActivity() {
                         border={0}
                         color={"gray.500"}
                         _placeholder={{
-                          color: "gray.500"
+                          color: "gray.500",
                         }}
                         h={100}
                         onChange={handleRequirement}
@@ -193,7 +196,8 @@ function FormActivity() {
                     </Stack>
                   </Flex>
                 </Stack>
-                <Button
+                {/* <Button
+                  onClick={onClose}
                   fontFamily={"heading"}
                   mt={8}
                   type="submit"
@@ -206,7 +210,7 @@ function FormActivity() {
                   }}
                 >
                   Enregistrer
-                </Button>
+                </Button> */}
               </Box>
             </Stack>
           </Container>
