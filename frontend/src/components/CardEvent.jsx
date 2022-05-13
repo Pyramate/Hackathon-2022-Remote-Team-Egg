@@ -15,8 +15,7 @@ export default function CardEvent({ anEvent }) {
   return (
     <Flex py={6}>
       <Box
-        maxW={'445px'}
-        w={'full'}
+        w="full"
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
         rounded={'md'}
