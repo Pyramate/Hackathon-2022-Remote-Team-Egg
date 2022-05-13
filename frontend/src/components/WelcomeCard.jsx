@@ -1,4 +1,6 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import {
   CircularProgress,
   CircularProgressLabel,
@@ -8,13 +10,29 @@ import {
   Text,
   useColorModeValue,
   Flex,
-  Image
+  Image,
 } from "@chakra-ui/react";
 
 import dailyChallenge from "../assets/dailychallenge.png";
 
-export default function WelcomeCard({ users }) {
+export default function WelcomeCard({ user }) {
   const color = useColorModeValue("green.700");
+
+  const [ecologicalLevel, setEcologicalLevel] = useState("");
+  const [familyname, setFamilyname] = useState("");
+
+  const { id } = useParams();
+
+  const getUser = () => {
+    axios.get(`http://localhost:4000/api/users/${id}`, {
+      familyname: familyname,
+      ecologicalLevel: ecologicalLevel,
+    }).then((response) => response.data)
+    .then((data) => console.log(data.familyname));
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div>
@@ -37,8 +55,8 @@ export default function WelcomeCard({ users }) {
               pl={2}
               px={3}
             >
-              Hello la tribu
-              {/* {users.familyname} */} !
+              Hello la tribu 
+              {familyname} !
             </Heading>
 
             <Text
