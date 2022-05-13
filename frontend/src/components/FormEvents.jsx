@@ -25,6 +25,7 @@ function FormEvents() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [eventLocation, setEventLocation] = useState("");
+  const [pictureActivity, setPictureActivity] = useState("");
 
   function handleName(e) {
     setName(e.target.value);
@@ -55,6 +56,10 @@ function FormEvents() {
   }
   function handleRequirement(e) {
     setRequirement(e.target.value);
+  }
+
+  function handlePicture(e) {
+    setPictureActivity(e.target.value);
   }
 
   const postEvent = (e) => {
