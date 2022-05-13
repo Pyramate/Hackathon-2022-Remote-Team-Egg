@@ -1,13 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import '../src/styles/App.css';
-import FormInscription from './pages/Form_Inscription';
-import FormActivity from './components/FormActivity';
-import FormEvents from './components/FormEvents';
-import FormChallenge from './components/FormChallenge';
-import ActivitesGlobales from './pages/ActivitesGlobales';
-import EvenementsGlobales from './pages/Evenements';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import "../src/styles/App.css";
+import FormInscription from "./pages/Form_Inscription";
+import FormActivity from "./components/FormActivity";
+import FormEvents from "./components/FormEvents";
+import FormChallenge from "./components/FormChallenge";
+import ActivitesGlobales from "./pages/ActivitesGlobales";
+import EvenementsGlobales from "./pages/Evenements";
 
 function App() {
   return (
