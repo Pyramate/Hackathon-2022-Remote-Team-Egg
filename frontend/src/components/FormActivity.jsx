@@ -1,7 +1,6 @@
 import {
   Input,
   Stack,
-  Button,
   Flex,
   Container,
   Box,
@@ -9,7 +8,6 @@ import {
   Select,
   Heading,
   Image,
-  useDisclosure,
 } from "@chakra-ui/react";
 import fond from "../assets/background.png";
 import { useState } from "react";
@@ -24,8 +22,6 @@ function FormActivity() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [requirement, setRequirement] = useState("");
-
-  const { onClose } = useDisclosure();
 
   function handleName(e) {
     setName(e.target.value);
