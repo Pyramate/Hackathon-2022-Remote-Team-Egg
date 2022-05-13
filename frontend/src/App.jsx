@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import "../src/styles/App.css";
 import FormInscription from "./pages/Form_Inscription";
 import ActivitesGlobales from "./pages/ActivitesGlobales";
+import EvenementsGlobales from "./pages/Evenements";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
         <Route path="/" element={<FormInscription />} />
         <Route path="/accueil" element={<Home />} />
         <Route path="/activites" element={<ActivitesGlobales />} />
-        {/*<Route path="/evenements" element={<Evenements_Globales />} />
-        <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route path="/evenements" element={<EvenementsGlobales />} />
+        {/*} <Route path="/dashboard" element={<Dashboard />} /> */}
       </Routes>
     </Router>
   );
