@@ -40,7 +40,7 @@ export default function Home() {
               </Button>
             </Link>
           </Flex>
-          <CarouselGlobalEventsHome />
+          <CarouselGlobalEventsHome isOnHome={true} />
         </Flex>
       </Flex>
     </Box>

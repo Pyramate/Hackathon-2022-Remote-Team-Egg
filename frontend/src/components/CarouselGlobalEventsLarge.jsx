@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Flex, Link } from '@chakra-ui/react';
 
-import CardEvent from './CardEvent.jsx';
+import CardEventLarge from './CardEventLarge';
 
-export default function CarouselGlobalEventsHome({
+export default function CarouselGlobalEventsLarge({
   limit = null,
   isOnHome = false,
 }) {
@@ -26,17 +26,20 @@ export default function CarouselGlobalEventsHome({
 
   return (
     <Flex
-      direction={isOnHome ? 'row' : 'column'}
+      direction="column"
       justifyContent="space-between"
       flexWrap="no-wrap"
+      w="90%"
+      maxW="900px"
       overflow="auto"
-      gap={6}
     >
       {limit
         ? events
             .slice(0, limit)
-            .map((event) => <CardEvent anEvent={event} key={event.id} />)
-        : events.map((event) => <CardEvent anEvent={event} key={event.id} />)}
+            .map((event) => <CardEventLarge anEvent={event} key={event.id} />)
+        : events.map((event) => (
+            <CardEventLarge anEvent={event} key={event.id} />
+          ))}
     </Flex>
   );
 }
