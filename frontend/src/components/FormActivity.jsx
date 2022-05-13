@@ -11,7 +11,7 @@ import {
   Select,
   Heading,
 } from "@chakra-ui/react";
-import fond from "../assets/fondinscription.png";
+import fond from "../assets/background.png";
 import { useState } from "react";
 import axios from "axios";
 
@@ -86,14 +86,10 @@ function FormActivity() {
                   lineHeight={1.1}
                   fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
                 >
-                  Il n’est jamais trop tôt pour faire de grandes choses{" "}
+                  Partage tes supers idées d'activité avec le reste de la communauté.{" "}
                 </Heading>
                 <Text color={"gray.500"} fontSize={{ base: "sm", sm: "xl" }}>
-                  Découvre et partage les initiatives écologiques de ta ville.{" "}
-                </Text>
-                <Text color={"gray.500"} fontSize={{ base: "sm", sm: "xl" }}>
-                  Fais grimper la conscience de ta famille en participant à un
-                  maximum d'événements!{" "}
+                  N'oublie pas d'indiquer toutes les informations nécessaires !{" "}
                 </Text>
               </Stack>
               <Box as={"form"} mt={10}>
