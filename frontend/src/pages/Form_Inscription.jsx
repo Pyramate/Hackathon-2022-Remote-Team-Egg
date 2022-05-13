@@ -11,10 +11,13 @@ import {
   Select,
   Heading,
 } from '@chakra-ui/react';
+import Home from './Home.jsx';
 import Background from '../assets/fondinscription.png';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { setUser } from '../services/userService.js';
 
 export default function FormInscription() {
   const [familyname, setFamilyname] = useState('');
@@ -42,14 +45,18 @@ export default function FormInscription() {
 
   const postUser = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:4000/api/users', {
-      familyname: familyname,
-      email: email,
-      ageGroup: ageGroup,
-      city: city,
-      ecologicalLevel: ecologicalLevel,
-    });
-    navigate('/accueil');
+    axios
+      .post('http://localhost:4000/api/users', {
+        familyname: familyname,
+        email: email,
+        ageGroup: ageGroup,
+        city: city,
+        ecologicalLevel: ecologicalLevel,
+      })
+      .then((response) => {
+        setUser(response.data);
+        navigate('/accueil');
+      });
   };
 
   return (
