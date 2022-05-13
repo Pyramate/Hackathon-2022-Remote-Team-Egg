@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Flex, Box } from '@chakra-ui/react';
-import Background from '../assets/background.png';
 import '../styles/index.css';
-import WelcomeCard from '../components/WelcomeCard';
-import DailyChallenge from '../components/DailyChallenge';
+import Background from '../assets/background.png';
+import WelcomeCard from "../components/WelcomeCard";
+import DailyChallenge from "../components/DailyChallenge";
+import CarouselGlobalActivitiesHome from "../components/CarouselGlobalActivitiesHome";
 import Header from '../components/Header';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <WelcomeCard />
         <DailyChallenge />
       </Flex>
+      <CarouselGlobalActivitiesHome limit={3} />
     </Box>
   );
 }
