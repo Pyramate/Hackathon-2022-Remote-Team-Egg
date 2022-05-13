@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { Flex, Box, Heading, Link, Button } from '@chakra-ui/react';
 import Background from '../assets/background.png';
@@ -8,16 +7,6 @@ import DailyChallenge from '../components/DailyChallenge';
 import CarouselGlobalActivitiesHome from '../components/CarouselGlobalActivitiesHome';
 import CarouselGlobalEventsHome from '../components/CarouselGlobalEventsHome';
 import Header from '../components/Header';
-=======
-import React from "react";
-import { Flex, Box } from "@chakra-ui/react";
-import "../styles/index.css";
-import Background from "../assets/background.png";
-import WelcomeCard from "../components/WelcomeCard";
-import DailyChallenge from "../components/DailyChallenge";
-import CarouselGlobalActivitiesHome from "../components/CarouselGlobalActivitiesHome";
-import Header from "../components/Header";
->>>>>>> 2c246e1f8285cb7c376ad20d4745e68ae3922a4d
 
 export default function Home() {
   return (
