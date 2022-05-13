@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Flex, Link } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import CardActivity from "./CardActivity";
 

@@ -16,6 +16,8 @@ import {
   Image,
 } from "@chakra-ui/react";
 
+import { FiClock } from "react-icons/fi";
+
 import createurDeContenu from "../assets/createur-de-contenu.png";
 import enfants from "../assets/enfants.png";
 import histoire from "../assets/histoire.png";
@@ -60,7 +62,6 @@ function CardActivity({ activity }) {
             </Flex>
             <Heading fontStyle="italic" alignSelf="center">
               {activity.name}
-              NOM ACTIVITE
             </Heading>
             <Flex
               justifyContent="space-around"
@@ -73,21 +74,18 @@ function CardActivity({ activity }) {
                 <Image src={liste} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
                   {activity.category}
-                  Catégorie
                 </Text>
               </Flex>
               <Flex gap="2">
-                <Image src={histoire} w="40px" />
+                <FiClock size="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
                   {activity.duration}
-                  Durée
                 </Text>
               </Flex>
               <Flex gap="2">
                 <Image src={enfants} w="40px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
                   {activity.ageGroup}
-                  Tranche d'âge
                 </Text>
               </Flex>
             </Flex>
