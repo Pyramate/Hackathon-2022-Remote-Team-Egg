@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import { useState } from "react";
 import {
   Box,
   Flex,
@@ -16,6 +16,13 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 import Logo from "../assets/ecolokids.png";
@@ -42,8 +49,15 @@ const NavLink = ({ children }) => (
 );
 
 export default function Header() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
+    />
+  );
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
 
   return (
     <>
@@ -115,36 +129,63 @@ export default function Header() {
               </Link>
             </HStack>
           </HStack>
-          <Flex alignItems={"center"}>
-            <Button
-              variant={"solid"}
-              color="white"
-              bg={"#6E41E2"}
-              size={"lg"}
-              mr={4}
-              leftIcon={<AddIcon />}
-              _hover={{ bg: "#9b76f8" }}
-            >
-              Action
-            </Button>
+          <Flex alignItems={"center"} justifyContent="space-around" minW="25%">
             <Menu>
               <MenuButton
+                variant={"solid"}
+                color="white"
+                bg={"#6E41E2"}
+                size={"lg"}
                 as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
+                leftIcon={<AddIcon />}
+                _hover={{ bg: "#9b76f8" }}
               >
-                <Avatar
-                  size={"md"}
-                  src="https://avatars.dicebear.com/api/avataaars/:seed.svg"
-                />
+                Part initiative
               </MenuButton>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  minW={0}
+                >
+                  <Avatar
+                    size={"md"}
+                    src="https://avatars.dicebear.com/api/avataaars/:seed.svg"
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Account</MenuItem>
+                  <MenuItem>Settings</MenuItem>
+                  <MenuDivider />
+                  <MenuItem>Log Out</MenuItem>
+                </MenuList>
+              </Menu>
               <MenuList>
-                <MenuItem>Account</MenuItem>
-                <MenuItem>Settings</MenuItem>
-                <MenuDivider />
-                <MenuItem>Log Out</MenuItem>
+                <MenuItem>
+                  {" "}
+                  <Button
+                    onClick={() => {
+                      setOverlay(<OverlayOne />);
+                      onOpen();
+                    }}
+                  >
+                    Propose ton activité
+                  </Button>
+                  <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                    {overlay}
+                    <ModalContent>
+                      <ModalHeader>Modal Title</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody></ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </MenuItem>
+                <MenuItem>Create a Copy</MenuItem>
+                <MenuItem>Mark as Draft</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
