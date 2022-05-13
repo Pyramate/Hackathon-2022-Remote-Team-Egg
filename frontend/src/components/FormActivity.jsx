@@ -1,19 +1,18 @@
 import {
   Input,
   Stack,
-  Button,
   Flex,
   Container,
   Box,
   FormControl,
   Select,
   Heading,
-  Image
-} from "@chakra-ui/react";
-import fond from "../assets/background.png";
-import { useState } from "react";
-import axios from "axios";
-import activity from "../assets/activity.png";
+  Image,
+} from '@chakra-ui/react';
+import fond from '../assets/background.png';
+import { useState } from 'react';
+import axios from 'axios';
+import activity from '../assets/activity.png';
 
 function FormActivity() {
   const [name, setName] = useState("");
@@ -53,7 +52,7 @@ function FormActivity() {
 
   const postActivity = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:4000/api/activities", {
+    axios.post('http://localhost:4000/api/activities', {
       name: name,
       duration: duration,
       category: category,
@@ -69,52 +68,52 @@ function FormActivity() {
     <>
       <FormControl isRequired onSubmit={postActivity}>
         <Box bgImage={fond} bgRepeat="no-repeat" bgSize="cover">
-        <Container py={{ base: 5, sm: 10, lg: 15 }} z-index="10" h="auto">
+          <Container py={{ base: 5, sm: 10, lg: 15 }} z-index="10" h="auto">
             <Stack spacing={{ base: 10, md: 20 }}></Stack>
             <Stack
-              bg={"none"}
-              rounded={"xl"}
+              bg={'none'}
+              rounded={'xl'}
               p={{ base: 4, sm: 6, md: 5 }}
               spacing={{ base: 8 }}
-              maxW={{ lg: "2xl" }}
+              maxW={{ lg: '2xl' }}
             >
               <Stack spacing={4}>
                 <Heading
-                  color={"green.800"}
+                  color={'green.800'}
                   lineHeight={1.1}
-                  fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
+                  fontSize={{ base: '2xl', sm: '3xl', md: '5xl' }}
                 >
-                  Partage tes activités préférées.{" "}
+                  Partage tes activités préférées.{' '}
                 </Heading>
-                  <Image
-                    objectFit="cover"
-                    boxSize="100%"
-                    h="300px"
-                    src={activity}
-                  />
+                <Image
+                  objectFit="cover"
+                  boxSize="100%"
+                  h="300px"
+                  src={activity}
+                />
               </Stack>
-              <Box as={"form"} mt={10}>
+              <Box as={'form'} mt={10}>
                 <Stack spacing={4}>
                   <Flex direction="column" justify="20px">
                     <Stack spacing={4}>
                       <Input
                         placeholder="Nom de l'activité"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         mr="1rem"
                         onChange={handleName}
                       />
                       <Input
                         placeholder="Durée"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         onChange={handleDuration}
                       />
@@ -126,9 +125,9 @@ function FormActivity() {
                         name="Catégorie"
                         bg={"gray.100"}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         onChange={handleCategory}
                         mr="1rem"
@@ -143,35 +142,35 @@ function FormActivity() {
                       </Select>{" "}
                       <Select
                         name="Niveau Ecolo"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         onChange={handleLevel}
                         mr="1rem"
                       >
                         <option value="" disabled selected>
                           Niveau Ecolo
-                        </option>{" "}
+                        </option>{' '}
                         <option value="Beginner">Débutant</option>
                         <option value="Intermediate">Avancé</option>
                         <option value="Advanced">Confirmé</option>
                       </Select>
                       <Select
                         name="age"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         onChange={handleAge}
                       >
                         <option value="" disabled selected>
                           Age
-                        </option>{" "}
+                        </option>{' '}
                         <option value="0-3">0-3</option>
                         <option value="4-7">4-7</option>
                         <option value="8-11">8-11</option>
@@ -183,11 +182,11 @@ function FormActivity() {
                     <Stack spacing={4}>
                       <Input
                         placeholder="Description"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500",
+                          color: 'gray.500',
                         }}
                         mr="1rem"
                         h={200}
@@ -195,11 +194,11 @@ function FormActivity() {
                       />
                       <Input
                         placeholder="Matériel requis"
-                        bg={"gray.100"}
+                        bg={'gray.100'}
                         border={0}
-                        color={"gray.500"}
+                        color={'gray.500'}
                         _placeholder={{
-                          color: "gray.500"
+                          color: 'gray.500',
                         }}
                         h={100}
                         onChange={handleRequirements}
@@ -217,20 +216,21 @@ function FormActivity() {
                     </Stack>
                   </Flex>
                 </Stack>
-                <Button
+                {/* <Button
+                  onClick={onClose}
                   fontFamily={"heading"}
                   mt={8}
                   type="submit"
-                  w={"full"}
+                  w={'full'}
                   bgGradient="linear(to-r, purple.400,purple.200)"
-                  color={"white"}
+                  color={'white'}
                   _hover={{
-                    bgGradient: "linear(to-r, purple.200,purple.400)",
-                    boxShadow: "xl",
+                    bgGradient: 'linear(to-r, purple.200,purple.400)',
+                    boxShadow: 'xl',
                   }}
                 >
                   Enregistrer
-                </Button>
+                </Button> */}
               </Box>
             </Stack>
           </Container>

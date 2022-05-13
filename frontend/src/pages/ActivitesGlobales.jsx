@@ -1,13 +1,16 @@
 import logoactivite from '../assets/bglogo.png';
 import { Box, Container, Text, Flex } from '@chakra-ui/react';
 import CarouselGlobalActivitiesPages from '../components/CarouselGlobalActivitiesPages';
+import Header from '../components/Header';
 
 import background from '../assets/background.png';
 
 export default function ActivitesGlobales() {
   return (
     <>
+      <Header />
       <Box bgImage={background} bgRepeat="no-repeat" bgSize="cover">
+        <Header />
         <Container
           bgImage={logoactivite}
           bgRepeat="repeat"
