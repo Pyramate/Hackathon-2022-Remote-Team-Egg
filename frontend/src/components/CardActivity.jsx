@@ -30,13 +30,13 @@ import niveau from "../assets/niveau-superieur.png";
 function CardActivity({ activity }) {
   const [users, setUsers] = useState([]);
 
-  const getActivity = () => {
+  const getUser = () => {
     axios
       .get("https://localhost4000/api/users")
       .then((res) => setUsers(users(res.activity)));
   };
   useEffect(() => {
-    getActivity();
+    getUser();
   }, []);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,7 +46,7 @@ function CardActivity({ activity }) {
         flexDirection="column"
         align="center"
         h="450px"
-        w="450px"
+        w="400px"
         border="1px"
         borderRadius="32px"
         boxShadow={"2xl"}

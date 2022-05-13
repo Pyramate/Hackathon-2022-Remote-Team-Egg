@@ -5,7 +5,6 @@ import { Button, Flex, Link } from "@chakra-ui/react";
 import CardActivity from "./CardActivity";
 
 export default function CarouselGlobalActivities() {
-  const [users, setUsers] = useState([]);
   const [activity, setActivity] = useState([]);
 
   const getActivity = () => {
@@ -19,12 +18,14 @@ export default function CarouselGlobalActivities() {
 
   return (
     <Flex justifyContent="space-around" flexWrap="wrap">
-      <CardActivity />
-      <CardActivity />
-      <CardActivity />
-      {activity.map((activity) => (
-        <CardActivity activity={activity} key={activity.id} />
-      ))}
+      <Flex justifyContent="space-around" flexWrap="wrap" w="80%">
+        <CardActivity />
+        <CardActivity />
+        <CardActivity />
+        {activity.map((activity) => (
+          <CardActivity activity={activity} key={activity.id} />
+        ))}
+      </Flex>
       <Link fontStyle="italic" href="/activites" alignSelf="center">
         <Button
           color="white"
