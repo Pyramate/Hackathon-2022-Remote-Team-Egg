@@ -20,7 +20,7 @@ import {
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import Logo from '../assets/ecolokids.png';
 const Links = ['Activités', 'Evénements', 'Dashboard'];
-const Linkto = ['/activites', '/events', '/dashboard'];
+// const Linkto = ['/activites', '/events', '/dashboard'];
 
 const NavLink = ({ children }) => (
   <Link
