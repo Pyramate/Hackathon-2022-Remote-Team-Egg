@@ -13,34 +13,35 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import { FiClock } from "react-icons/fi";
-
-import createurDeContenu from "../assets/createur-de-contenu.png";
-import enfants from "../assets/enfants.png";
-import histoire from "../assets/histoire.png";
-import liste from "../assets/liste.png";
-import niveau from "../assets/niveau-superieur.png";
+import {
+  FaRegClock,
+  FaAward,
+  FaChild,
+  FaClipboardList,
+  FaUserEdit,
+} from "react-icons/fa";
 
 function CardActivity({ activity }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex flexDirection="column" h="500px">
       <Flex
+        bgColor="white"
         flexDirection="column"
         align="center"
         h="450px"
         w="400px"
-        border="1px"
-        borderRadius="32px"
+        borderRadius="lg"
+        bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
       >
         <Box
           h="40%"
           w="100%"
-          borderTopRadius="30px"
+          borderRadius="lg"
           bgImage={activity.pictureActivity}
           bgRepeat="no-repeat"
           bgSize="cover"
@@ -54,11 +55,7 @@ function CardActivity({ activity }) {
             justifyContent="space-between"
           >
             <Flex gap="6" ml="1rem">
-              <Avatar
-                alignSelf="flex-start"
-                size="lg"
-                // src={user.avatarUrl}
-              />
+              <Avatar alignSelf="flex-start" size="lg" src={activity.userId} />
             </Flex>
             <Heading fontStyle="italic" alignSelf="center">
               {activity.name}
@@ -70,20 +67,20 @@ function CardActivity({ activity }) {
               flexWrap="wrap"
               gap="2"
             >
-              <Flex gap="2">
-                <Image src={liste} w="40px" />
+              <Flex gap="2" placeItems="center">
+                <FaClipboardList size="30px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
                   {activity.category}
                 </Text>
               </Flex>
-              <Flex gap="2">
-                <FiClock size="40px" />
+              <Flex gap="2" placeItems="center">
+                <FaRegClock size="30px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
                   {activity.duration}
                 </Text>
               </Flex>
-              <Flex gap="2">
-                <Image src={enfants} w="40px" />
+              <Flex gap="2" placeItems="center">
+                <FaChild size="30px" />
                 <Text alignSelf="center" align="center" fontSize="2xl">
                   {activity.ageGroup}
                 </Text>
@@ -138,50 +135,48 @@ function CardActivity({ activity }) {
             justifyContent="space-around"
           >
             <Flex justifyContent="space-around" w="100%" flexWrap="wrap">
-              <Flex gap="5">
-                <Image src={liste} w="50px" />
-                <Text fontSize="3xl">{activity.category}</Text>
+              <Flex gap="5" placeItems="center">
+                <FaClipboardList size="60px" />
+                <Text fontSize="4xl">{activity.category}</Text>
               </Flex>
-              <Flex gap="5">
-                <Image src={enfants} w="50px" />
-                <Text fontSize="3xl">{activity.ageGroup}</Text>
+              <Flex gap="5" placeItems="center">
+                <FaChild size="60px" />
+                <Text fontSize="4xl">{activity.ageGroup}</Text>
               </Flex>
-              <Flex gap="5">
-                <Image src={histoire} w="50px" />
-                <Text fontSize="3xl">{activity.duration}</Text>
+              <Flex gap="5" placeItems="center">
+                <FaRegClock size="60px" />
+                <Text fontSize="4xl">{activity.duration}</Text>
               </Flex>
-              <Flex gap="5">
-                <Image src={niveau} w="50px" />
-                <Text fontSize="3xl">{activity.ecologicalLevel}</Text>
-              </Flex>
-              <Flex gap="5">
-                <Image src={createurDeContenu} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {user.familyname} */}
-                  Créateur
-                </Text>
+              <Flex gap="5" placeItems="center">
+                <FaAward size="60px" />
+                <Text fontSize="4xl">{activity.ecologicalLevel}</Text>
               </Flex>
             </Flex>
 
-            <Flex h="40%">
+            <Flex
+              h="40%"
+              flexDirection={{ base: "column", xl: "row" }}
+              alignItems={{ base: "center", xl: "initial" }}
+            >
               <Flex
-                w="50%"
+                w={{ base: "90%", xl: "100%" }}
                 m="1rem"
                 p="2rem"
                 border="1px"
                 borderColor="#6E41E2"
                 borderRadius="30px"
                 boxShadow="dark-lg"
+                justifyContent="flex-start"
                 flexDirection="column"
-                justifyContent="space-around"
+                gap="3"
               >
                 <Heading>Matériels : </Heading>
-                <Text alignSelf="center" fontSize="2xl">
+                <Text alignSelf="flex-start" fontSize="2xl">
                   {activity.requirements}
                 </Text>
               </Flex>
               <Flex
-                w="50%"
+                w={{ base: "90%", xl: "100%" }}
                 m="1rem"
                 p="2rem"
                 border="1px"
@@ -189,10 +184,11 @@ function CardActivity({ activity }) {
                 borderRadius="30px"
                 boxShadow="dark-lg"
                 flexDirection="column"
-                justifyContent="space-around"
+                justifyContent="flex-start"
+                gap="3"
               >
                 <Heading>Détails : </Heading>
-                <Text alignSelf="center" fontSize="2xl">
+                <Text alignSelf="flex-start" fontSize="2xl">
                   {activity.description}
                 </Text>
               </Flex>
