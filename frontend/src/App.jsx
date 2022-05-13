@@ -5,6 +5,7 @@ import "../src/styles/App.css";
 import FormInscription from "./pages/Form_Inscription";
 import FormActivity from "./components/FormActivity";
 import FormEvents from "./components/FormEvents";
+import ActivitesGlobales from "./pages/ActivitesGlobales";
 
 function App() {
   return (
