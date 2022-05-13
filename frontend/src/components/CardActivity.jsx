@@ -13,35 +13,30 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import activityCookies from "../assets/activityCookies.png";
-import createurDeContenu from "../assets/createur-de-contenu.png";
-import enfants from "../assets/enfants.png";
-import histoire from "../assets/histoire.png";
-import liste from "../assets/liste.png";
-import niveau from "../assets/niveau-superieur.png";
+import { FaRegClock, FaAward, FaChild, FaClipboardList } from "react-icons/fa";
 
-function CardActivity({ activity, user }) {
+function CardActivity({ activity }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex flexDirection="column" h="500px">
       <Flex
+        bgColor="white"
         flexDirection="column"
         align="center"
         h="450px"
-        w="450px"
-        border="1px"
-        borderRadius="30px"
+        w="400px"
+        borderRadius="lg"
+        bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
       >
         <Box
           h="40%"
           w="100%"
-          borderTopRadius="30px"
-          bgImage={activityCookies}
-          // bgImage={activity.pictureActivity}
+          borderRadius="lg"
+          bgImage={activity.pictureActivity}
           bgRepeat="no-repeat"
           bgSize="cover"
           bgPos="center"
@@ -55,18 +50,14 @@ function CardActivity({ activity, user }) {
           >
             <Flex gap="6" ml="1rem">
               <Avatar
+                border="2px solid white"
                 alignSelf="flex-start"
                 size="lg"
-                // src={user.avatarUrl}
+                src={activity.userId}
               />
-              <Text alignSelf="end" fontSize="3xl" color="#6E41E2" mt="1.8rem">
-                {/* {user.familyname} */}
-                NOM FAMILLE
-              </Text>
             </Flex>
-            <Heading fontStyle="italic" alignSelf="center">
-              {/* {activity.name} */}
-              NOM ACTIVITE
+            <Heading fontFamily={"body"} fontSize="3xl" alignSelf="center">
+              {activity.name}
             </Heading>
             <Flex
               justifyContent="space-around"
@@ -75,33 +66,51 @@ function CardActivity({ activity, user }) {
               flexWrap="wrap"
               gap="2"
             >
-              <Flex gap="2">
-                <Image src={liste} w="40px" />
-                <Text alignSelf="center" align="center" fontSize="2xl">
-                  {/* {activity.category} */}
-                  Catégorie
+              <Flex gap="2" placeItems="center">
+                <FaClipboardList color="#6E41E2" size="30px" />
+                <Text
+                  fontFamily={"body"}
+                  alignSelf="center"
+                  align="center"
+                  fontSize={"xl"}
+                  color={useColorModeValue("gray.700", "gray.400")}
+                >
+                  {activity.category}
                 </Text>
               </Flex>
-              <Flex gap="2">
-                <Image src={histoire} w="40px" />
-                <Text alignSelf="center" align="center" fontSize="2xl">
-                  {/* {activity.duration} */}
-                  Durée
+              <Flex gap="2" placeItems="center">
+                <FaRegClock color="#6E41E2" size="30px" />
+                <Text
+                  fontFamily={"body"}
+                  alignSelf="center"
+                  align="center"
+                  fontSize={"xl"}
+                  color={useColorModeValue("gray.700", "gray.400")}
+                >
+                  {activity.duration}
                 </Text>
               </Flex>
-              <Flex gap="2">
-                <Image src={enfants} w="40px" />
-                <Text alignSelf="center" align="center" fontSize="2xl">
-                  {/* {activity.ageGroup} */}
-                  Tranche d'âge
+              <Flex gap="2" placeItems="center">
+                <FaChild color="#6E41E2" size="30px" />
+                <Text
+                  fontFamily={"body"}
+                  alignSelf="center"
+                  align="center"
+                  fontSize={"xl"}
+                  color={useColorModeValue("gray.700", "gray.400")}
+                >
+                  {activity.ageGroup}
                 </Text>
               </Flex>
             </Flex>
             <Button
+              fontFamily={"body"}
+              borderRadius="lg"
               onClick={onOpen}
               colorScheme="purple"
               w="40%"
               alignSelf="center"
+              fontSize={"md"}
             >
               Voir plus de détails
             </Button>
@@ -114,8 +123,7 @@ function CardActivity({ activity, user }) {
         <ModalContent>
           <ModalHeader p="0">
             <Box
-              bgImage={activityCookies}
-              // bgImage={activity.pictureActivity}
+              bgImage={activity.pictureActivity}
               bgRepeat="no-repeat"
               bgSize="cover"
               bgPos="center"
@@ -125,22 +133,17 @@ function CardActivity({ activity, user }) {
                   <Avatar
                     alignSelf="flex-start"
                     size="2xl"
-                    // src={user.avatarUrl}
+                    border="3px solid white"
+                    src={activity.userId}
                   />
-                  <Text alignSelf="end" fontSize="6xl" color="#6E41E2">
-                    {/* {user.familyname} */}
-                    NOM FAMILLE
-                  </Text>
                 </Flex>
-                <Text
-                  fontStyle="italic"
+                <Heading
                   alignSelf="center"
-                  fontSize="7xl"
-                  textShadow="2px 2px grey"
+                  fontSize={"6xl"}
+                  fontFamily={"body"}
                 >
-                  {/* {activity.name} */}
-                  NOM ACTIVITE
-                </Text>
+                  {activity.name}
+                </Heading>
               </Flex>
             </Box>
           </ModalHeader>
@@ -152,82 +155,67 @@ function CardActivity({ activity, user }) {
             justifyContent="space-around"
           >
             <Flex justifyContent="space-around" w="100%" flexWrap="wrap">
-              <Flex gap="5">
-                <Image src={liste} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.category} */}
-                  Catégorie
+              <Flex gap="5" placeItems="center">
+                <FaClipboardList color="#6E41E2" size="60px" />
+                <Text fontSize={"4xl"} fontFamily={"body"}>
+                  {activity.category}
                 </Text>
               </Flex>
-              <Flex gap="5">
-                <Image src={enfants} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.ageGroup} */}
-                  Tranche d'âge
+              <Flex gap="5" placeItems="center">
+                <FaChild color="#6E41E2" size="60px" />
+                <Text fontSize={"4xl"} fontFamily={"body"}>
+                  {activity.ageGroup}
                 </Text>
               </Flex>
-              <Flex gap="5">
-                <Image src={histoire} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.duration} */}
-                  Durée
+              <Flex gap="5" placeItems="center">
+                <FaRegClock color="#6E41E2" size="60px" />
+                <Text fontSize={"4xl"} fontFamily={"body"}>
+                  {activity.duration}
                 </Text>
               </Flex>
-              <Flex gap="5">
-                <Image src={niveau} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {activity.ecologicalLevel} */}
-                  Niveau
-                </Text>
-              </Flex>
-              <Flex gap="5">
-                <Image src={createurDeContenu} w="50px" />
-                <Text fontSize="3xl">
-                  {/* {user.familyname} */}
-                  Créateur
+              <Flex gap="5" placeItems="center">
+                <FaAward color="#6E41E2" size="60px" />
+                <Text fontSize={"4xl"} fontFamily={"body"}>
+                  {activity.ecologicalLevel}
                 </Text>
               </Flex>
             </Flex>
 
-            <Flex h="40%">
+            <Flex
+              h="40%"
+              flexDirection={{ base: "column", xl: "row" }}
+              alignItems={{ base: "center", xl: "initial" }}
+            >
               <Flex
-                w="50%"
+                w={{ base: "90%", xl: "100%" }}
                 m="1rem"
                 p="2rem"
-                border="1px"
-                borderColor="#6E41E2"
-                borderRadius="30px"
-                boxShadow="dark-lg"
+                borderRadius="lg"
+                bg={useColorModeValue("white", "gray.900")}
+                boxShadow={"2xl"}
+                justifyContent="flex-start"
                 flexDirection="column"
-                justifyContent="space-around"
+                gap="3"
               >
                 <Heading>Matériels : </Heading>
-                <Text alignSelf="center" fontSize="2xl">
-                  {/* {activity.requirements} */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquid voluptatum quidem rem fugiat nostrum vitae accusamus
-                  delectus in? Doloremque corporis nostrum odio at autem eos
-                  maiores aspernatur quam ea accusantium.
+                <Text alignSelf="flex-start" fontSize="2xl">
+                  {activity.requirements}
                 </Text>
               </Flex>
               <Flex
-                w="50%"
+                w={{ base: "90%", xl: "100%" }}
                 m="1rem"
                 p="2rem"
-                border="1px"
-                borderColor="#6E41E2"
-                borderRadius="30px"
-                boxShadow="dark-lg"
+                borderRadius="lg"
+                bg={useColorModeValue("white", "gray.900")}
+                boxShadow={"2xl"}
                 flexDirection="column"
-                justifyContent="space-around"
+                justifyContent="flex-start"
+                gap="3"
               >
                 <Heading>Détails : </Heading>
-                <Text alignSelf="center" fontSize="2xl">
-                  {/* {activity.description} */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquid voluptatum quidem rem fugiat nostrum vitae accusamus
-                  delectus in? Doloremque corporis nostrum odio at autem eos
-                  maiores aspernatur quam ea accusantium.
+                <Text alignSelf="flex-start" fontSize="2xl">
+                  {activity.description}
                 </Text>
               </Flex>
             </Flex>
@@ -235,13 +223,13 @@ function CardActivity({ activity, user }) {
 
           <ModalFooter alignSelf="center">
             <Button
-              color="white"
               onClick={onClose}
-              fontSize="6xl"
-              h="80px"
-              w="500px"
+              fontSize="5xl"
+              h="60px"
+              w="300px"
               variant="solid"
               colorScheme="purple"
+              pb="0.5rem"
             >
               Fermer
             </Button>

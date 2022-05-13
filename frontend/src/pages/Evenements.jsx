@@ -1,6 +1,12 @@
 import { Box, Container, Grid, GridItem, Flex } from "@chakra-ui/react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 export default function EvenementsGlobales() {
+  const [map, setMap] = useState("");
+
+  axios
+    .get("http://api.positionstack.com/v1/4705068defc72a9e86a8ee87daa7c416")
+    .then((res) => console.log(res.data));
   return (
     <>
       <Container>
