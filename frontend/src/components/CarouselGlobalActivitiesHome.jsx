@@ -17,20 +17,13 @@ export default function CarouselGlobalActivitiesHome({ limit = null }) {
       });
   };
 
-  // const [users, setUsers] = useState([]);
-
-  // const getUser = () => {
-  //   axios.get("https://localhost4000/api/users").then((res) => setUsers(res));
-  // };
-
   useEffect(() => {
     getActivity();
-    // getUser();
   }, []);
 
   return (
     <Flex justifyContent="space-around" flexWrap="wrap">
-      <Flex justifyContent="space-around" flexWrap="wrap" w="80%">
+      <Flex justifyContent="space-around" flexWrap="wrap" minW="80%" gap="2">
         {limit
           ? activities
               .slice(0, limit)
@@ -41,7 +34,13 @@ export default function CarouselGlobalActivitiesHome({ limit = null }) {
               <CardActivity activity={activity} key={activity.id} />
             ))}
       </Flex>
-      <Link fontStyle="italic" href="/activites" alignSelf="center">
+      <Link
+        fontStyle="italic"
+        href="/activites"
+        alignSelf="center"
+        w="20%"
+        textAlign="center"
+      >
         <Button
           color="white"
           fontSize="2xl"

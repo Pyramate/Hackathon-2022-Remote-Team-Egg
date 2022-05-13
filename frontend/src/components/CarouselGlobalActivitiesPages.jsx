@@ -17,15 +17,8 @@ export default function CarouselGlobalActivitiesPages({ genre = null }) {
       });
   };
 
-  // const [users, setUsers] = useState([]);
-
-  // const getUser = () => {
-  //   axios.get("https://localhost4000/api/users").then((res) => setUsers(res));
-  // };
-
   useEffect(() => {
     getActivity();
-    // getUser();
   }, []);
 
   return (
